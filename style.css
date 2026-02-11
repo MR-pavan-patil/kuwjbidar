@@ -245,6 +245,92 @@ body::before {
 }
 
 
+/* Notification Banner */
+
+.notification-banner {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-gold), var(--gold-dark));
+    padding: 1rem 5%;
+    z-index: 9999;
+    animation: slideDown 0.5s ease-out;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+}
+
+.notification-banner.hidden {
+    display: none;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.notification-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notification-icon {
+    font-size: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-text {
+    color: var(--dark-bg);
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: block;
+}
+
+.notification-close {
+    background: rgba(10, 10, 15, 0.2);
+    border: none;
+    color: var(--dark-bg);
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.notification-close:hover {
+    background: var(--dark-bg);
+    color: var(--primary-gold);
+    transform: rotate(90deg);
+}
+
+
 /* Hero Section with Background Image */
 
 .hero {

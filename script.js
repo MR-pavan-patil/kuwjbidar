@@ -3,6 +3,65 @@ const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
 const dropdowns = document.querySelectorAll('.dropdown');
 
+// Notification Banner with Rotating Messages
+const notifications = [
+    "🎉 Early bird registration ends in 3 days! Register now to save 30%",
+    "📢 New keynote speaker announced - Dr. Anjali Sharma joins us!",
+    "🎨 Workshop registrations are now open - Limited seats available",
+    "🏛️ Heritage tour of Bidar Fort included with all passes",
+    "⭐ Special discount for students and cultural organizations"
+];
+
+let currentNotificationIndex = 0;
+const notificationBanner = document.getElementById('notificationBanner');
+const notificationText = document.getElementById('notificationText');
+const closeNotification = document.getElementById('closeNotification');
+
+// Check if banner was closed in this session
+if (!sessionStorage.getItem('notificationClosed')) {
+    notificationBanner.classList.remove('hidden');
+
+    // Rotate messages every 5 seconds
+    setInterval(() => {
+        currentNotificationIndex = (currentNotificationIndex + 1) % notifications.length;
+        notificationText.style.opacity = '0';
+
+        setTimeout(() => {
+            notificationText.textContent = notifications[currentNotificationIndex];
+            notificationText.style.opacity = '1';
+        }, 300);
+    }, 5000);
+
+    notificationText.style.transition = 'opacity 0.3s ease';
+}
+
+// Close notification
+if (closeNotification) {
+    closeNotification.addEventListener('click', () => {
+        notificationBanner.style.animation = 'slideUp 0.5s ease-out';
+        setTimeout(() => {
+            notificationBanner.classList.add('hidden');
+            sessionStorage.setItem('notificationClosed', 'true');
+        }, 500);
+    });
+}
+
+// Add slideUp animation
+const slideUpStyle = document.createElement('style');
+slideUpStyle.textContent = `
+    @keyframes slideUp {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(slideUpStyle);
+
 // Toggle mobile menu
 mobileMenuBtn.addEventListener('click', () => {
     mobileMenuBtn.classList.toggle('active');
