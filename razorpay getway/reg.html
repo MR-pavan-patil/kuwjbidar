@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration - Premium Experience</title>
+
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        /* ============================================
+           DESIGN PHILOSOPHY:
+           - Refined luxury aesthetic
+           - Corporate trustworthiness
+           - Premium serif + modern sans pairing
+           - Rich jewel tones with gold accents
+           - Subtle animations for premium feel
+           ============================================ */
+        
+         :root {
+            /* Premium Color Palette */
+            --primary-dark: #1a1a2e;
+            --primary-navy: #16213e;
+            --accent-gold: #d4af37;
+            --accent-copper: #b87333;
+            --text-primary: #2c2c2c;
+            --text-secondary: #666666;
+            --bg-cream: #faf9f6;
+            --bg-white: #ffffff;
+            --border-light: #e5e5e5;
+            --success-green: #2d6a4f;
+            --error-red: #c1121f;
+            /* Spacing System */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            /* Typography */
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Source Sans Pro', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Import Premium Fonts */
+        
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, #f0ede5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-md);
+            color: var(--text-primary);
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Decorative Background Elements */
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -40%;
+            left: -15%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(22, 33, 62, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(30px, -30px) scale(1.05);
+            }
+        }
+        /* Main Container */
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Card Design */
+        
+        .registration-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: var(--spacing-xl);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 12px 24px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Gold Accent Bar */
+        
+        .registration-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-copper));
+        }
+        /* Header Section */
+        
+        .header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .event-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-navy), var(--primary-dark));
+            color: var(--accent-gold);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: var(--spacing-xs);
+            line-height: 1.2;
+        }
+        
+        .header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+        /* Form Styling */
+        
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        /* Staggered animation for form fields */
+        
+        .form-group:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .form-group:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .form-group:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        
+        .form-group:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+        
+        .form-group:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .required {
+            color: var(--accent-copper);
+            font-size: 1.1rem;
+        }
+        
+        .optional {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            background: var(--bg-white);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        input::placeholder {
+            color: #aaaaaa;
+        }
+        
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23666666' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        /* Input validation states */
+        
+        input:invalid:not(:placeholder-shown) {
+            border-color: var(--error-red);
+        }
+        
+        input:valid:not(:placeholder-shown) {
+            border-color: var(--success-green);
+        }
+        /* Payment Button */
+        
+        .payment-section {
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .price-display {
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .price-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+        
+        .price-amount {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .price-currency {
+            font-size: 1.5rem;
+            vertical-align: super;
+            margin-right: 0.25rem;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 1.125rem 2rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            font-family: var(--font-body);
+            color: var(--bg-white);
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-dark) 100%);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(22, 33, 62, 0.3);
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 33, 62, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .submit-btn:disabled::before {
+            display: none;
+        }
+        /* Lock Icon in Button */
+        
+        .btn-icon {
+            display: inline-block;
+            margin-left: 0.5rem;
+            font-size: 1rem;
+        }
+        /* Trust Badges */
+        
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--border-light);
+            flex-wrap: wrap;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .trust-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--success-green);
+        }
+        /* Loading State */
+        
+        .loading {
+            position: relative;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-left: 0.5rem;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        /* Error Message */
+        
+        .error-message {
+            background: #fff5f5;
+            border-left: 4px solid var(--error-red);
+            padding: var(--spacing-sm);
+            border-radius: 4px;
+            color: var(--error-red);
+            font-size: 0.875rem;
+            margin-top: var(--spacing-md);
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 640px) {
+            body {
+                padding: var(--spacing-sm);
+            }
+            .registration-card {
+                padding: var(--spacing-lg);
+            }
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            .price-amount {
+                font-size: 2rem;
+            }
+            .submit-btn {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="registration-card">
+            <!-- Header -->
+            <div class="header">
+                <div class="event-badge">Premium Event</div>
+                <h1>Event Registration</h1>
+                <p>Secure your spot at our exclusive experience</p>
+            </div>
+
+            <!-- Registration Form -->
+            <form id="registrationForm" class="registration-form" novalidate>
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullName">
+                        Full Name
+                        <span class="required">*</span>
+                    </label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required minlength="2">
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">
+                        Email Address
+                        <span class="required">*</span>
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                </div>
+
+                <!-- Mobile Number -->
+                <div class="form-group">
+                    <label for="mobile">
+                        Mobile Number
+                        <span class="required">*</span>
+                    </label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="10-digit mobile number" required pattern="[0-9]{10}" maxlength="10">
+                </div>
+
+                <!-- City -->
+                <div class="form-group">
+                    <label for="city">
+                        City
+                        <span class="optional">(optional)</span>
+                    </label>
+                    <input type="text" id="city" name="city" placeholder="Enter your city">
+                </div>
+
+                <!-- Profession -->
+                <div class="form-group">
+                    <label for="profession">
+                        Profession
+                        <span class="optional">(optional)</span>
+                    </label>
+                    <select id="profession" name="profession">
+                        <option value="">Select your profession</option>
+                        <option value="student">Student</option>
+                        <option value="software_engineer">Software Engineer</option>
+                        <option value="business_owner">Business Owner</option>
+                        <option value="consultant">Consultant</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="designer">Designer</option>
+                        <option value="marketing">Marketing Professional</option>
+                        <option value="finance">Finance Professional</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Error Message -->
+                <div id="errorMessage" class="error-message"></div>
+
+                <!-- Payment Section -->
+                <div class="payment-section">
+                    <div class="price-display">
+                        <div class="price-label">Registration Fee</div>
+                        <div class="price-amount">
+                            <span class="price-currency">₹</span>300
+                        </div>
+                    </div>
+
+                    <button type="submit" id="paymentBtn" class="submit-btn">
+                        Proceed to Secure Payment
+                        <span class="btn-icon">🔒</span>
+                    </button>
+
+                    <!-- Trust Indicators -->
+                    <div class="trust-indicators">
+                        <div class="trust-badge">
+                            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg> SSL Secured
+                        </div>
+                        <div class="trust-badge">
+                            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg> Razorpay Secure
+                        </div>
+                        <div class="trust-badge">
+                            <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg> Instant Confirmation
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        /* ============================================
+                                                                                                                                                                                                                                                                   RAZORPAY PAYMENT INTEGRATION
+                                                                                                                                                                                                                                                                   ============================================
+                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                   Flow:
+                                                                                                                                                                                                                                                                   1. User fills registration form
+                                                                                                                                                                                                                                                                   2. Click "Proceed to Secure Payment"
+                                                                                                                                                                                                                                                                   3. Validate form data
+                                                                                                                                                                                                                                                                   4. Open Razorpay payment modal
+                                                                                                                                                                                                                                                                   5. On success: Capture payment_id, lock form, redirect to receipt
+                                                                                                                                                                                                                                                                   6. On failure: Show error, allow retry
+                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                   Note: This is TEST MODE - No real money charged
+                                                                                                                                                                                                                                                                   ============================================ */
+
+        // Configuration
+        const CONFIG = {
+            razorpayKey: 'rzp_test_SC7PVavp0gdkU1', // Test mode key
+            amount: 30000, // Amount in paise (₹500.00)
+            currency: 'INR',
+            companyName: 'Premium Event',
+            companyLogo: '', // Optional: Add your logo URL
+            theme: '#16213e'
+        };
+
+        // Form elements
+        const form = document.getElementById('registrationForm');
+        const paymentBtn = document.getElementById('paymentBtn');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Form validation state
+        let isFormLocked = false;
+
+        // User data storage (temporary - in memory)
+        let registrationData = {
+            fullName: '',
+            email: '',
+            mobile: '',
+            city: '',
+            profession: '',
+            paymentId: '',
+            timestamp: ''
+        };
+
+        /**
+         * Display error message to user
+         */
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                errorMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        /**
+         * Validate form fields
+         */
+        function validateForm() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+
+            // Check required fields
+            if (!fullName || fullName.length < 2) {
+                showError('Please enter your full name (minimum 2 characters)');
+                return false;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                showError('Please enter a valid email address');
+                return false;
+            }
+
+            // Mobile validation (10 digits)
+            const mobileRegex = /^[0-9]{10}$/;
+            if (!mobile || !mobileRegex.test(mobile)) {
+                showError('Please enter a valid 10-digit mobile number');
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * Collect form data
+         */
+        function collectFormData() {
+            registrationData = {
+                fullName: document.getElementById('fullName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                mobile: document.getElementById('mobile').value.trim(),
+                city: document.getElementById('city').value.trim() || 'Not provided',
+                profession: document.getElementById('profession').value || 'Not provided',
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('Form data collected:', registrationData);
+        }
+
+        /**
+         * Lock form to prevent changes after payment
+         */
+        function lockForm() {
+            isFormLocked = true;
+            const inputs = form.querySelectorAll('input, select, button');
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+            paymentBtn.textContent = 'Payment Completed ✓';
+            console.log('Form locked after successful payment');
+        }
+
+        /**
+         * Open Razorpay payment modal
+         */
+        function openRazorpayCheckout() {
+            const options = {
+                key: CONFIG.razorpayKey,
+                amount: CONFIG.amount, // Amount in paise
+                currency: CONFIG.currency,
+                name: CONFIG.companyName,
+                description: 'Event Registration Fee',
+                image: CONFIG.companyLogo,
+
+                // Prefill user details
+                prefill: {
+                    name: registrationData.fullName,
+                    email: registrationData.email,
+                    contact: registrationData.mobile
+                },
+
+                // Theme customization
+                theme: {
+                    color: CONFIG.theme
+                },
+
+                // Payment success handler
+                handler: function(response) {
+                    console.log('Payment successful!', response);
+                    handlePaymentSuccess(response);
+                },
+
+                // Payment modal closed handler
+                modal: {
+                    ondismiss: function() {
+                        console.log('Payment modal closed by user');
+                        paymentBtn.classList.remove('loading');
+                        paymentBtn.disabled = false;
+                    }
+                }
+            };
+
+            // Create Razorpay instance and open
+            const razorpay = new Razorpay(options);
+
+            // Error handler
+            razorpay.on('payment.failed', function(response) {
+                console.error('Payment failed:', response.error);
+                handlePaymentFailure(response.error);
+            });
+
+            // Open payment modal
+            razorpay.open();
+        }
+        // tammmaaaa
+
+        /**
+         * Send registration data to Google Sheets backend
+         */
+        function sendToGoogleSheets(data) {
+            // YOUR WEB APP URL HERE
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDGnilWmbkOHJsrZQM-BbSJPUfZoQLLGt1daUXaWQUAmFXIwQkyRgCf-MVUQ2v3uPquA/exec';
+
+            console.log('Sending data to Google Sheets...', data);
+
+            // Prepare data for backend
+            const backendData = {
+                fullName: data.fullName,
+                email: data.email,
+                mobile: data.mobile,
+                city: data.city,
+                profession: data.profession,
+                paymentId: data.paymentId,
+                amount: '500' // or use dynamic amount
+            };
+
+            // Send POST request to Google Apps Script
+            fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Important for Google Apps Script
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(backendData)
+                })
+                .then(response => {
+                    console.log('Data sent to Google Sheets successfully');
+                    // Note: With 'no-cors', we can't read the response
+                    // But the data is still saved
+                })
+                .catch(error => {
+                    console.error('Error sending to Google Sheets:', error);
+                    // Don't block the user flow - just log the error
+                });
+        }
+
+        /**
+         * Handle successful payment
+         */
+        function handlePaymentSuccess(response) {
+            // Extract payment ID
+            const paymentId = response.razorpay_payment_id;
+
+            console.log('Payment ID:', paymentId);
+
+            // Store payment ID with user data
+            registrationData.paymentId = paymentId;
+
+            // Lock the form
+            lockForm();
+
+            sendToGoogleSheets(registrationData);
+
+            // Store data in sessionStorage for receipt page
+            sessionStorage.setItem('registrationData', JSON.stringify(registrationData));
+
+            console.log('Complete registration data:', registrationData);
+
+            // Redirect to receipt page after brief delay
+            setTimeout(() => {
+                window.location.href = 'receipt.html';
+            }, 1000);
+        }
+
+        /**
+         * Handle payment failure
+         */
+        function handlePaymentFailure(error) {
+            console.error('Payment error details:', error);
+
+            // Reset button state
+            paymentBtn.classList.remove('loading');
+            paymentBtn.disabled = false;
+
+            // Show user-friendly error message
+            let errorMsg = 'Payment failed. Please try again.';
+
+            if (error.description) {
+                errorMsg = error.description;
+            } else if (error.reason) {
+                errorMsg = error.reason;
+            }
+
+            showError(errorMsg);
+        }
+
+        /**
+         * Form submission handler
+         */
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Prevent submission if form is locked
+            if (isFormLocked) {
+                return;
+            }
+
+            // Validate form
+            if (!validateForm()) {
+                return;
+            }
+
+            // Collect form data
+            collectFormData();
+
+            // Update button state
+            paymentBtn.classList.add('loading');
+            paymentBtn.disabled = true;
+
+            // Small delay for better UX (simulating processing)
+            setTimeout(() => {
+                // Open Razorpay checkout
+                openRazorpayCheckout();
+            }, 300);
+        });
+
+        /**
+         * Real-time mobile number validation
+         */
+        document.getElementById('mobile').addEventListener('input', function(e) {
+            // Remove non-numeric characters
+            this.value = this.value.replace(/[^0-9]/g, '');
+
+            // Limit to 10 digits
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+        });
+
+        /**
+         * Prevent form submission on Enter key (except on submit button)
+         */
+        form.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
+                e.preventDefault();
+            }
+        });
+
+        // Console message for developers
+        console.log('%c🚀 Event Registration System', 'font-size: 20px; font-weight: bold; color: #16213e;');
+        console.log('%cRazorpay Test Mode Active', 'font-size: 14px; color: #d4af37;');
+        console.log('Configuration:', CONFIG);
+    </script>
+</body>
+
+</html>

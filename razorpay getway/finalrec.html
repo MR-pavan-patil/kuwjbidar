@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt - Event Registration Confirmed</title>
+
+    <style>
+        /* ============================================
+           DESIGN PHILOSOPHY:
+           - Executive/Corporate aesthetic
+           - Trust through minimalism and precision
+           - Inspired by premium banking/financial receipts
+           - Distinctive font pairing: DM Serif Display + IBM Plex Sans
+           - Deep navy + warm gold accents
+           - High contrast, clear hierarchy
+           - Micro-interactions that feel expensive
+           ============================================ */
+        
+         :root {
+            /* Sophisticated Color Palette */
+            --navy-deep: #0f1419;
+            --navy-primary: #1a2332;
+            --navy-light: #2a3644;
+            --gold-primary: #c9a76a;
+            --gold-light: #d4b882;
+            --gold-dark: #b89656;
+            /* Semantic Colors */
+            --success-green: #0a7e4d;
+            --success-bg: #e6f4ed;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            /* Backgrounds */
+            --bg-primary: #fafafa;
+            --bg-white: #ffffff;
+            --bg-cream: #f8f6f3;
+            --border-light: #e5e7eb;
+            --border-medium: #d1d5db;
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            /* Typography */
+            --font-display: 'DM Serif Display', serif;
+            --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+            --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Import Premium Fonts */
+        
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+        /* Smooth Scrolling */
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-cream) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md);
+            color: var(--text-primary);
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        /* Subtle Background Pattern */
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient( 0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.01) 2px, rgba(0, 0, 0, 0.01) 4px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* Main Container */
+        
+        .receipt-container {
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Receipt Card */
+        
+        .receipt-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+        /* Top Accent Bar */
+        
+        .receipt-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--navy-deep), var(--navy-primary), var(--gold-primary));
+        }
+        /* Header Section */
+        
+        .receipt-header {
+            background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-primary) 100%);
+            padding: var(--space-xl) var(--space-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Header Decoration */
+        
+        .receipt-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(201, 167, 106, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .receipt-header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(201, 167, 106, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        /* Success Icon */
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            box-shadow: 0 8px 24px rgba(201, 167, 106, 0.3);
+            animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--navy-deep);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            animation: checkDraw 0.8s ease-out 0.6s backwards;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes checkDraw {
+            from {
+                stroke-dasharray: 100;
+                stroke-dashoffset: 100;
+            }
+            to {
+                stroke-dasharray: 100;
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        .receipt-header h1 {
+            font-family: var(--font-display);
+            font-size: 2.25rem;
+            font-weight: 400;
+            color: var(--bg-white);
+            margin-bottom: var(--space-xs);
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .receipt-header p {
+            color: var(--gold-light);
+            font-size: 1.125rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+        /* Body Section */
+        
+        .receipt-body {
+            padding: var(--space-xl) var(--space-lg);
+        }
+        /* Alert Message */
+        
+        .entry-alert {
+            background: linear-gradient(135deg, var(--success-bg) 0%, #f0f9f4 100%);
+            border-left: 4px solid var(--success-green);
+            border-radius: 8px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            animation: slideInLeft 0.6s ease-out 0.8s backwards;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .entry-alert-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--success-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .entry-alert-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            stroke-width: 2.5;
+        }
+        
+        .entry-alert-text {
+            flex: 1;
+        }
+        
+        .entry-alert-text strong {
+            display: block;
+            color: var(--success-green);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .entry-alert-text p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        /* Coupon Code Section */
+        
+        .coupon-section {
+            background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-primary) 100%);
+            border-radius: 12px;
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.6s ease-out 1s backwards;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Decorative Pattern */
+        
+        .coupon-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient( 45deg, transparent, transparent 10px, rgba(201, 167, 106, 0.03) 10px, rgba(201, 167, 106, 0.03) 20px);
+            pointer-events: none;
+        }
+        
+        .coupon-label {
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-light);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .coupon-code {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--bg-white);
+            letter-spacing: 3px;
+            margin-bottom: var(--space-sm);
+            word-break: break-all;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .coupon-instruction {
+            font-size: 0.875rem;
+            color: var(--gold-light);
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        /* Details Grid */
+        
+        .details-section {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .section-title {
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-xs);
+            border-bottom: 2px solid var(--border-light);
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .detail-item {
+            animation: fadeIn 0.5s ease-out backwards;
+        }
+        /* Staggered animation */
+        
+        .detail-item:nth-child(1) {
+            animation-delay: 1.1s;
+        }
+        
+        .detail-item:nth-child(2) {
+            animation-delay: 1.2s;
+        }
+        
+        .detail-item:nth-child(3) {
+            animation-delay: 1.3s;
+        }
+        
+        .detail-item:nth-child(4) {
+            animation-delay: 1.4s;
+        }
+        
+        .detail-item:nth-child(5) {
+            animation-delay: 1.5s;
+        }
+        
+        .detail-item:nth-child(6) {
+            animation-delay: 1.6s;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 0.375rem;
+        }
+        
+        .detail-value {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            word-break: break-word;
+        }
+        /* Payment Summary */
+        
+        .payment-summary {
+            background: var(--bg-cream);
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .payment-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) 0;
+        }
+        
+        .payment-row:not(:last-child) {
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .payment-label {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+        
+        .payment-value {
+            font-size: 0.9375rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .payment-row.total {
+            padding-top: var(--space-md);
+            margin-top: var(--space-xs);
+        }
+        
+        .payment-row.total .payment-label {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .payment-row.total .payment-value {
+            font-family: var(--font-display);
+            font-size: 1.875rem;
+            color: var(--navy-deep);
+        }
+        /* Transaction ID */
+        
+        .transaction-id {
+            background: white;
+            border: 2px dashed var(--gold-primary);
+            border-radius: 8px;
+            padding: var(--space-md);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .transaction-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .transaction-value {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            word-break: break-all;
+        }
+        /* Action Buttons */
+        
+        .actions {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-primary) 100%);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--navy-deep);
+            border: 2px solid var(--border-medium);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-dark);
+        }
+        /* Footer */
+        
+        .receipt-footer {
+            background: var(--bg-cream);
+            padding: var(--space-lg);
+            text-align: center;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .footer-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .footer-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-light);
+        }
+        /* Print Styles */
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .receipt-container {
+                max-width: 100%;
+                box-shadow: none;
+            }
+            .receipt-card {
+                box-shadow: none;
+                border: 1px solid var(--border-light);
+            }
+            .actions {
+                display: none;
+            }
+            .entry-alert,
+            .coupon-section,
+            .detail-item {
+                animation: none;
+            }
+        }
+        /* Responsive Design */
+        
+        @media (max-width: 768px) {
+            body {
+                padding: var(--space-sm);
+            }
+            .receipt-header {
+                padding: var(--space-lg) var(--space-md);
+            }
+            .receipt-header h1 {
+                font-size: 1.75rem;
+            }
+            .success-icon {
+                width: 64px;
+                height: 64px;
+            }
+            .success-icon svg {
+                width: 32px;
+                height: 32px;
+            }
+            .receipt-body {
+                padding: var(--space-lg) var(--space-md);
+            }
+            .coupon-section {
+                padding: var(--space-lg) var(--space-md);
+            }
+            .coupon-code {
+                font-size: 1.75rem;
+                letter-spacing: 2px;
+            }
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            .actions {
+                flex-direction: column;
+            }
+            .payment-row.total .payment-value {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .receipt-header h1 {
+                font-size: 1.5rem;
+            }
+            .coupon-code {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="receipt-container">
+        <div class="receipt-card">
+            <!-- Header -->
+            <div class="receipt-header">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h1>Payment Confirmed</h1>
+                <p>Your registration is complete</p>
+            </div>
+
+            <!-- Body -->
+            <div class="receipt-body">
+                <!-- Entry Alert -->
+                <div class="entry-alert">
+                    <div class="entry-alert-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="entry-alert-text">
+                        <strong>Important: Save This Receipt</strong>
+                        <p>Please show this entry code at the event gate. Screenshot or print this page for easy access.</p>
+                    </div>
+                </div>
+
+                <!-- Coupon Code -->
+                <div class="coupon-section">
+                    <div class="coupon-label">Entry Code</div>
+                    <div class="coupon-code" id="couponCode">BIDAR-MEET-2026-ABC123</div>
+                    <div class="coupon-instruction">Show this code at the event entrance</div>
+                </div>
+
+                <!-- Event Details -->
+                <div class="details-section">
+                    <div class="section-title">Event Information</div>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Event Name</div>
+                            <div class="detail-value" id="eventName">Premium Tech Conference 2026</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Event Date</div>
+                            <div class="detail-value">March 15, 2026</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendee Details -->
+                <div class="details-section">
+                    <div class="section-title">Attendee Details</div>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Full Name</div>
+                            <div class="detail-value" id="userName">John Anderson</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Email Address</div>
+                            <div class="detail-value" id="userEmail">john.anderson@example.com</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Mobile Number</div>
+                            <div class="detail-value" id="userMobile">+91 98765 43210</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Registration Date</div>
+                            <div class="detail-value" id="registrationDate">February 4, 2026, 2:30 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Summary -->
+                <div class="payment-summary">
+                    <div class="payment-row">
+                        <span class="payment-label">Registration Fee</span>
+                        <span class="payment-value" id="amount">₹500.00</span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="payment-label">Processing Fee</span>
+                        <span class="payment-value">₹0.00</span>
+                    </div>
+                    <div class="payment-row total">
+                        <span class="payment-label">Total Paid</span>
+                        <span class="payment-value" id="totalAmount">₹500.00</span>
+                    </div>
+                </div>
+
+                <!-- Transaction ID -->
+                <div class="transaction-id">
+                    <div class="transaction-label">Transaction ID</div>
+                    <div class="transaction-value" id="paymentId">pay_MNB12345xyz789ABC</div>
+                </div>
+
+                <!-- Actions -->
+                <div class="actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        <span>Print Receipt</span>
+                    </button>
+                    <a href="index.html" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Go to Home Page</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="receipt-footer">
+                <p class="footer-text">
+                    <strong>Thank you for registering!</strong><br> A confirmation email has been sent to <span id="footerEmail">john.anderson@example.com</span>
+                </p>
+                <p class="footer-text">
+                    For any queries, please contact our support team.
+                </p>
+                <div class="footer-meta">
+                    This is an official receipt. Keep it safe for event entry.<br> Receipt generated on <span id="receiptDate">February 4, 2026</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ============================================
+                   DYNAMIC DATA LOADING
+                   ============================================
+                   
+                   This script loads data from sessionStorage
+                   (passed from the payment page)
+                   
+                   If no data found, it displays sample data
+                   ============================================ */
+
+        // Format currency
+        function formatCurrency(amount) {
+            return '₹' + parseFloat(amount).toFixed(2);
+        }
+
+        // Format date and time
+        function formatDateTime(isoString) {
+            const date = new Date(isoString);
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            };
+            return date.toLocaleString('en-IN', options);
+        }
+
+        // Format date only
+        function formatDate(isoString) {
+            const date = new Date(isoString);
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            return date.toLocaleString('en-IN', options);
+        }
+
+        // Load data from sessionStorage
+        function loadReceiptData() {
+            const registrationDataString = sessionStorage.getItem('registrationData');
+
+            if (registrationDataString) {
+                try {
+                    const data = JSON.parse(registrationDataString);
+
+                    // Update all fields with actual data
+                    if (data.fullName) {
+                        document.getElementById('userName').textContent = data.fullName;
+                    }
+
+                    if (data.email) {
+                        document.getElementById('userEmail').textContent = data.email;
+                        document.getElementById('footerEmail').textContent = data.email;
+                    }
+
+                    if (data.mobile) {
+                        document.getElementById('userMobile').textContent = '+91 ' + data.mobile;
+                    }
+
+                    if (data.paymentId) {
+                        document.getElementById('paymentId').textContent = data.paymentId;
+                    }
+
+                    if (data.amount) {
+                        const formattedAmount = formatCurrency(data.amount);
+                        document.getElementById('amount').textContent = formattedAmount;
+                        document.getElementById('totalAmount').textContent = formattedAmount;
+                    }
+
+                    if (data.timestamp) {
+                        document.getElementById('registrationDate').textContent = formatDateTime(data.timestamp);
+                        document.getElementById('receiptDate').textContent = formatDate(data.timestamp);
+                    }
+
+                    // If coupon code exists in data (from backend)
+                    if (data.couponCode) {
+                        document.getElementById('couponCode').textContent = data.couponCode;
+                    }
+
+                    console.log('Receipt data loaded successfully:', data);
+
+                } catch (error) {
+                    console.error('Error parsing registration data:', error);
+                }
+            } else {
+                console.log('No registration data found - displaying sample data');
+            }
+        }
+
+        // Prevent back navigation
+        function preventBackNavigation() {
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function() {
+                window.history.pushState(null, null, window.location.href);
+            };
+        }
+
+        // Download receipt as image (optional feature)
+        function downloadReceipt() {
+            // This is a placeholder for future enhancement
+            // You could use html2canvas library to convert receipt to image
+            console.log('Download receipt functionality can be added here');
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadReceiptData();
+            preventBackNavigation();
+
+            console.log('%c✓ Receipt Page Loaded', 'font-size: 16px; font-weight: bold; color: #0a7e4d;');
+            console.log('%cReceipt is ready for display', 'font-size: 12px; color: #6b7280;');
+        });
+
+        // Optional: Add keyboard shortcut for print (Ctrl+P)
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+    </script>
+</body>
+
+</html>
