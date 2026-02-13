@@ -661,6 +661,15 @@ section {
 }
 
 
+/* gpt code */
+
+.team-image img {
+    opacity: 1 !important;
+    transform: none !important;
+    display: block !important;
+}
+
+
 /* Trust Section */
 
 .trust-section {
