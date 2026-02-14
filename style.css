@@ -302,7 +302,7 @@ body::before {
 
 .notification-banner {
     position: fixed;
-    top: 80px;
+    top: 94px;
     left: 0;
     width: 100%;
     background: linear-gradient(135deg, var(--primary-gold), var(--gold-dark));
