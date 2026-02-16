@@ -9,18 +9,66 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/GALLERY.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">BIDAR 2026</div>
+            <div class="logo"><img src="assets/images/about images/without bg logo.png" alt="" srcset="" style="width: 50px;"></div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="gallery.html" class="active">Gallery</a></li>
-                <li><a href="index.html#register" class="nav-cta">Register Now</a></li>
+                <li><a href="#home">Home</a></li>
+                <li class="dropdown">
+                    <a href="#about" class="dropdown-toggle">About <span class="arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#about">Event Overview</a></li>
+                        <li><a href="#about">Mission & Vision</a></li>
+                        <li><a href="#about">Event Schedule</a></li>
+                        <li><a href="#about">Organizing Committee</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#highlights" class="dropdown-toggle">Media<span class="arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#highlights"></a>
+                        </li>
+                        <li><a href="#guests">Images</a></li>
+                        <li><a href="#highlights">Paper cut Images</a></li>
+                        <li><a href="#gallery">Videos</a></li>
+                        <!-- <li><a href="#highlights">Exhibitions</a></li> -->
+                    </ul>
+                </li>
+
+                <li><a href="#home">Historic Places</a></li>
+                <li><a href="#Contact">Contact Us</a></li>
+
+                <!-- <li class="dropdown">
+                    <a href="#bidar" class="dropdown-toggle">Explore <span class="arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#bidar">Bidar Heritage</a></li>
+                        <li><a href="#bidar">Tourist Attractions</a></li>
+                        <li><a href="#bidar">Local Cuisine</a></li>
+                        <li><a href="#bidar">Accommodation</a></li>
+                        <li><a href="#bidar">Travel Guide</a></li>
+                    </ul>
+                </li> -->
+                <!-- <li><a href="#gallery">Gallery</a></li> -->
+                <!-- <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Media <span class="arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="updates.html">Updates & News</a></li>
+                        <li><a href="press.html">Press Coverage</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                    </ul>
+                </li> -->
+
+                <!-- <li><a href="#contact">Contact</a></li> -->
+                <li><a href="final payment getway razorpay/reg-final.html" class="nav-cta">Register Now</a></li>
+                <!-- un comment this for google translate widget -->
+
+                <!-- <div id="google_translate_element"></div> -->
             </ul>
             <div class="mobile-menu-btn">
                 <span></span>
