@@ -1112,11 +1112,11 @@ footer {
 }
 
 .social-link {
-    width: 45px;
-    height: 45px;
-    background: var(--glass-bg);
+    /* width: 45px;
+    height: 45px; */
+    /* background: var(--glass-bg); */
     backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
+    /* border: 1px solid var(--glass-border); */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1127,12 +1127,13 @@ footer {
     text-decoration: none;
 }
 
-.social-link:hover {
+
+/* .social-link:hover {
     background: var(--primary-gold);
     color: var(--dark-bg);
     transform: translateY(-5px);
     border-color: var(--primary-gold);
-}
+} */
 
 .social-link i {
     transition: transform 0.3s ease;
