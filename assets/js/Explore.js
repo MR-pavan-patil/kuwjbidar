@@ -2,18 +2,20 @@
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
 
-mobileMenuBtn.addEventListener('click', () => {
-    mobileMenuBtn.classList.toggle('active');
-    navLinks.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileMenuBtn.classList.remove('active');
-        navLinks.classList.remove('active');
+if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('active');
+        navLinks.classList.toggle('active');
     });
-});
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+}
 
 // Scroll Animation Observer
 const observerOptions = {
@@ -90,8 +92,6 @@ if (hero) {
 // Place Card Hover Effects
 const placeCards = document.querySelectorAll('.place-card');
 placeCards.forEach(card => {
-    const img = card.querySelector('.place-image img');
-
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-5px)';
     });
@@ -100,57 +100,6 @@ placeCards.forEach(card => {
         card.style.transform = 'translateY(0)';
     });
 });
-
-// Explore Button Click Animation
-const exploreButtons = document.querySelectorAll('.explore-btn');
-exploreButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.classList.add('ripple');
-
-        this.appendChild(ripple);
-
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-
-        // Placeholder action - can be linked to modal or detail page
-        console.log('Explore button clicked for:', this.closest('.place-card').getAttribute('data-place'));
-    });
-
-    button.style.position = 'relative';
-    button.style.overflow = 'hidden';
-});
-
-// Add ripple styles
-const rippleStyle = document.createElement('style');
-rippleStyle.textContent = `
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: scale(0);
-        animation: rippleEffect 0.6s ease-out;
-        pointer-events: none;
-    }
-    
-    @keyframes rippleEffect {
-        to {
-            transform: scale(2);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(rippleStyle);
 
 // Smooth Scroll for Navigation
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -253,7 +202,6 @@ const imageObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const img = entry.target;
-
             if (!img.complete) {
                 img.style.opacity = '0';
                 img.addEventListener('load', () => {
@@ -261,13 +209,10 @@ const imageObserver = new IntersectionObserver((entries) => {
                     img.style.opacity = '1';
                 });
             }
-
             imageObserver.unobserve(img);
         }
     });
-}, {
-    rootMargin: '100px'
-});
+}, { rootMargin: '100px' });
 
 document.querySelectorAll('.place-image img').forEach(img => {
     imageObserver.observe(img);
@@ -282,16 +227,17 @@ const enhancePlaceCards = () => {
                 const image = card.querySelector('.place-image');
                 const content = card.querySelector('.place-content');
 
-                // Stagger animation
-                setTimeout(() => {
-                    image.style.transform = 'translateX(0)';
-                    image.style.opacity = '1';
-                }, 100);
+                if (image && content) {
+                    setTimeout(() => {
+                        image.style.transform = 'translateX(0)';
+                        image.style.opacity = '1';
+                    }, 100);
 
-                setTimeout(() => {
-                    content.style.transform = 'translateX(0)';
-                    content.style.opacity = '1';
-                }, 300);
+                    setTimeout(() => {
+                        content.style.transform = 'translateX(0)';
+                        content.style.opacity = '1';
+                    }, 300);
+                }
 
                 placeObserver.unobserve(card);
             }
@@ -302,21 +248,22 @@ const enhancePlaceCards = () => {
         const image = card.querySelector('.place-image');
         const content = card.querySelector('.place-content');
 
-        // Set initial states
-        if (card.classList.contains('place-card-reverse')) {
-            image.style.transform = 'translateX(50px)';
-            content.style.transform = 'translateX(-50px)';
-        } else {
-            image.style.transform = 'translateX(-50px)';
-            content.style.transform = 'translateX(50px)';
+        if (image && content) {
+            if (card.classList.contains('place-card-reverse')) {
+                image.style.transform = 'translateX(50px)';
+                content.style.transform = 'translateX(-50px)';
+            } else {
+                image.style.transform = 'translateX(-50px)';
+                content.style.transform = 'translateX(50px)';
+            }
+
+            image.style.opacity = '0';
+            content.style.opacity = '0';
+            image.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            content.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            placeObserver.observe(card);
         }
-
-        image.style.opacity = '0';
-        content.style.opacity = '0';
-        image.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-        content.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-
-        placeObserver.observe(card);
     });
 };
 
@@ -345,61 +292,70 @@ tipCards.forEach((card, index) => {
 
 // Map Pins Animation
 const mapPins = document.querySelectorAll('.pin-item');
-const pinsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            mapPins.forEach((pin, index) => {
-                setTimeout(() => {
-                    pin.style.opacity = '1';
-                    pin.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-            pinsObserver.disconnect();
-        }
-    });
-}, { threshold: 0.5 });
-
 if (mapPins.length > 0) {
+    const pinsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                mapPins.forEach((pin, index) => {
+                    setTimeout(() => {
+                        pin.style.opacity = '1';
+                        pin.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+                pinsObserver.disconnect();
+            }
+        });
+    }, { threshold: 0.5 });
+
     mapPins.forEach(pin => {
         pin.style.opacity = '0';
         pin.style.transform = 'translateY(20px)';
         pin.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
     });
 
-    pinsObserver.observe(document.querySelector('.map-pins'));
+    const mapPinsContainer = document.querySelector('.map-pins');
+    if (mapPinsContainer) {
+        pinsObserver.observe(mapPinsContainer);
+    }
 }
 
 // Navbar Scroll Effect
 const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 100) {
-        navbar.style.background = 'rgba(10, 10, 15, 0.98)';
-        navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
-    } else {
-        navbar.style.background = 'rgba(10, 10, 15, 0.95)';
-        navbar.style.boxShadow = 'none';
-    }
-});
-
-// Add hover effect to info items
-document.querySelectorAll('.info-item').forEach(item => {
-    item.addEventListener('mouseenter', function() {
-        const label = this.querySelector('.info-label');
-        label.style.transform = 'scale(1.1)';
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 100) {
+            navbar.style.background = 'rgba(10, 10, 15, 0.98)';
+            navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
+        } else {
+            navbar.style.background = 'rgba(10, 10, 15, 0.95)';
+            navbar.style.boxShadow = 'none';
+        }
     });
+}
 
-    item.addEventListener('mouseleave', function() {
-        const label = this.querySelector('.info-label');
-        label.style.transform = 'scale(1)';
+// Image Error Handling
+document.querySelectorAll('.place-image img').forEach(img => {
+    img.addEventListener('error', function() {
+        this.style.display = 'none';
+        const parent = this.closest('.place-image');
+        if (parent) {
+            parent.style.background = 'linear-gradient(135deg, var(--dark-card), var(--dark-secondary))';
+
+            const placeholder = document.createElement('div');
+            placeholder.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                color: var(--text-secondary);
+                font-size: 4rem;
+            `;
+            placeholder.innerHTML = '🏛️';
+            parent.appendChild(placeholder);
+        }
     });
-
-    const label = item.querySelector('.info-label');
-    label.style.transition = 'transform 0.3s ease';
 });
-
-// Console Greeting
-console.log('%c🏛️ Explore Historic Bidar ', 'background: #D4AF37; color: #0A0A0F; font-size: 18px; padding: 8px; font-weight: bold;');
-console.log('%cDiscover 600 years of architectural excellence', 'color: #D4AF37; font-size: 12px;');
 
 // Page Load Animation
 window.addEventListener('load', () => {
@@ -411,47 +367,5 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-// Image Error Handling
-document.querySelectorAll('.place-image img').forEach(img => {
-    img.addEventListener('error', function() {
-        this.style.display = 'none';
-        const parent = this.closest('.place-image');
-        parent.style.background = 'linear-gradient(135deg, var(--dark-card), var(--dark-secondary))';
-
-        const placeholder = document.createElement('div');
-        placeholder.style.cssText = `
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 4rem;
-        `;
-        placeholder.innerHTML = '🏛️';
-        parent.appendChild(placeholder);
-    });
-});
-
-// Add subtle parallax to place images
-placeCards.forEach(card => {
-    const image = card.querySelector('.place-image');
-
-    const parallaxObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                window.addEventListener('scroll', () => {
-                    const rect = image.getBoundingClientRect();
-                    const scrolled = window.pageYOffset;
-
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        const yPos = (rect.top - window.innerHeight / 2) * 0.1;
-                        image.style.transform = `translateY(${yPos}px)`;
-                    }
-                });
-            }
-        });
-    });
-
-    parallaxObserver.observe(image);
-});
+console.log('%c🏛️ Explore Historic Bidar ', 'background: #D4AF37; color: #0A0A0F; font-size: 18px; padding: 8px; font-weight: bold;');
+console.log('%cDiscover 600 years of architectural excellence', 'color: #D4AF37; font-size: 12px;');
