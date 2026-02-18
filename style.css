@@ -1238,6 +1238,9 @@ footer {
     .hero {
         background-attachment: scroll;
     }
+    .about-image {
+        height: 300px;
+    }
 }
 
 @media (max-width: 640px) {
