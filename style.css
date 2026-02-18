@@ -1269,6 +1269,9 @@ footer {
     .nav-links {
         width: 85%;
     }
+    .about-image {
+        height: 300px;
+    }
 }
 
 
