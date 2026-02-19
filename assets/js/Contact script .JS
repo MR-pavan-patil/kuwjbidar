@@ -40,7 +40,7 @@ document.querySelectorAll('.fade-in').forEach(el => {
 // ====================================
 
 // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw6umjVqntfDxvFqZICTX4EzG0U6QGRrjjSg2jv5-xRu_JVQ4VYhgkTVtN5CxT5uTZY/exec';
 
 const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
