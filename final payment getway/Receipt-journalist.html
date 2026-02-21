@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Receipt | Journalist Pass</title>
+
+    <style>
+         :root {
+            --primary: #0f1419;
+            --accent: #c9a76a;
+            --success: #0a7e4d;
+            --text: #2c2c2c;
+            --border: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+        
+        .receipt-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2028 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient( 45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 20px);
+        }
+        
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            animation: scaleIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .checkmark svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            animation: drawCheck 0.8s 0.3s ease forwards;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+        }
+        
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        .header h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .alert {
+            background: linear-gradient(135deg, var(--success) 0%, #0a9e5f 100%);
+            color: white;
+            padding: 1.25rem 2rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            animation: slideLeft 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes slideLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        .alert::before {
+            content: '⚠️';
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+        
+        .content {
+            padding: 2.5rem 2rem;
+        }
+        
+        .entry-code {
+            text-align: center;
+            padding: 2rem;
+            margin: 0 auto 2.5rem;
+            max-width: 500px;
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2028 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .entry-code::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient( 45deg, transparent, transparent 10px, rgba(201, 167, 106, 0.1) 10px, rgba(201, 167, 106, 0.1) 20px);
+        }
+        
+        .entry-code-label {
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .entry-code-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 2px;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border: 2px solid var(--accent);
+            position: relative;
+        }
+        
+        .section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .detail-item {
+            animation: fadeIn 0.6s ease;
+        }
+        
+        .detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-value {
+            font-size: 1rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .payment-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .transaction-id {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px dashed var(--accent);
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .transaction-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .transaction-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1.125rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .btn {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2028 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: #f8f9fa;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .footer strong {
+            color: var(--primary);
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .receipt-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .actions,
+            .btn {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .header {
+                padding: 2rem 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .entry-code-value {
+                font-size: 1.25rem;
+            }
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="receipt-container">
+        <div class="header">
+            <div class="checkmark">
+                <svg viewBox="0 0 52 52">
+                    <path d="M14 27l7 7 17-17" />
+                </svg>
+            </div>
+            <h1>Registration Confirmed</h1>
+            <p>Your journalist pass has been issued</p>
+        </div>
+
+        <div class="alert">
+            <strong>Important:</strong> Save this receipt and bring the Entry Code to the event gate
+        </div>
+
+        <div class="content">
+            <div class="entry-code">
+                <div class="entry-code-label">Entry Code</div>
+                <div class="entry-code-value" id="entryCode">LOADING...</div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Journalist Information</h2>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Name</div>
+                        <div class="detail-value" id="name">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Father's/Mother's Name</div>
+                        <div class="detail-value" id="parentName">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Newspaper</div>
+                        <div class="detail-value" id="newspaper">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Designation</div>
+                        <div class="detail-value" id="designation">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Place of Work</div>
+                        <div class="detail-value" id="placeOfWork">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">K.K.P.S. ID</div>
+                        <div class="detail-value" id="kkpsId">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Mobile</div>
+                        <div class="detail-value" id="mobile">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value" id="email">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Payment Details</h2>
+                <div class="payment-box">
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Amount Paid</div>
+                            <div class="detail-value" style="font-size: 1.5rem; font-weight: 700; color: var(--success);">₹<span id="amount">300</span></div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Registration Date</div>
+                            <div class="detail-value" id="regDate">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Status</div>
+                            <div class="detail-value" style="color: var(--success); font-weight: 700;">✓ CONFIRMED</div>
+                        </div>
+                    </div>
+
+                    <div class="transaction-id">
+                        <div class="transaction-label">UTR Number</div>
+                        <div class="transaction-value" id="utr">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-primary" onclick="window.print()">
+                    📄 Print Receipt
+                </button>
+                <a href="../index.html" class="btn btn-secondary">
+                    ← Back to Home
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                <strong>This is an official registration receipt</strong><br> Keep this for your records and bring the Entry Code to the event.<br> Registration ID: <span id="regId">-</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function loadData() {
+            try {
+                const data = JSON.parse(sessionStorage.getItem('regData'));
+
+                if (!data) {
+                    // Sample data for preview
+                    document.getElementById('entryCode').textContent = 'BIDAR-PRESS-2026-XXXXX';
+                    document.getElementById('name').textContent = 'Sample Name';
+                    document.getElementById('parentName').textContent = 'Parent Name';
+                    document.getElementById('newspaper').textContent = 'Sample Newspaper';
+                    document.getElementById('designation').textContent = 'Reporter';
+                    document.getElementById('placeOfWork').textContent = 'Bidar';
+                    document.getElementById('kkpsId').textContent = 'KKPS12345';
+                    document.getElementById('mobile').textContent = '9876543210';
+                    document.getElementById('email').textContent = 'sample@email.com';
+                    document.getElementById('amount').textContent = '300';
+                    document.getElementById('utr').textContent = '402912345678';
+                    document.getElementById('regDate').textContent = new Date().toLocaleString();
+                    document.getElementById('regId').textContent = 'REG-2026-SAMPLE';
+                    return;
+                }
+
+                // Generate entry code
+                const entryCode = `BIDAR-PRESS-2026-${generateCode(5)}`;
+
+                document.getElementById('entryCode').textContent = entryCode;
+                document.getElementById('name').textContent = data.name || '-';
+                document.getElementById('parentName').textContent = data.parentName || '-';
+                document.getElementById('newspaper').textContent = data.newspaper || '-';
+                document.getElementById('designation').textContent = data.designation || '-';
+                document.getElementById('placeOfWork').textContent = data.placeOfWork || '-';
+                document.getElementById('kkpsId').textContent = data.kkpsId || '-';
+                document.getElementById('mobile').textContent = data.mobile || '-';
+                document.getElementById('email').textContent = data.email || '-';
+                document.getElementById('amount').textContent = data.amount || '300';
+                document.getElementById('utr').textContent = data.utr || '-';
+                document.getElementById('regId').textContent = data.regId || '-';
+
+                // Format date
+                if (data.timestamp) {
+                    const date = new Date(data.timestamp);
+                    document.getElementById('regDate').textContent = date.toLocaleString('en-IN', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                }
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        function generateCode(length) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Prevent back navigation
+        history.pushState(null, '', location.href);
+        window.onpopstate = function() {
+            history.pushState(null, '', location.href);
+        };
+
+        // Load data on page load
+        loadData();
+
+        console.log('%c✅ Receipt Generated', 'font-size:16px; font-weight:bold; color:#0a7e4d');
+    </script>
+</body>
+
+</html>

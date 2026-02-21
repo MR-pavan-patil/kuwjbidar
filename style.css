@@ -137,7 +137,7 @@ body::before {
     align-items: center;
 }
 
-.logo {
+.logo-2 {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     font-weight: 700;
@@ -269,14 +269,16 @@ body::before {
     transition: all 0.3s ease;
 }
 
-.nav-cta:hover {
+
+/* .nav-cta:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 30px rgba(212, 175, 55, 0.5);
-}
+} */
 
-.nav-cta::after {
+
+/* .nav-cta::after {
     display: none;
-}
+} */
 
 
 /* Mobile Menu */
@@ -1244,7 +1246,7 @@ footer {
 }
 
 @media (max-width: 640px) {
-    .logo {
+    .logo-2 {
         font-size: 1.4rem;
     }
     .hero {
