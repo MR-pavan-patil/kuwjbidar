@@ -18,19 +18,128 @@
     <link rel="preconnect" href="https://translate.google.com">
     <link rel="dns-prefetch" href="https://translate.google.com">
 
+    <style>
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: logoReveal 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        .loading-text {
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: textReveal 1s ease-out 0.8s forwards;
+        }
+        
+        .loading-bar {
+            width: 0;
+            height: 3px;
+            background: #FFD700;
+            margin-top: 20px;
+            animation: loadingBar 2s ease-in-out forwards;
+        }
+        
+        @keyframes logoReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-30deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        
+        @keyframes textReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes loadingBar {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 200px;
+            }
+        }
+        /* Main Content (hidden during loading) */
+        
+        .content {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        
+        .content.show {
+            opacity: 1;
+        }
+    </style>
+
+
 
 
 </head>
 
 <body>
+
+    <div class="loader" id="loader">
+        <div class="logo-container">
+            <img src="assets/images/about images/without bg logo.png" alt="Bidari Utsav Logo" class="logo">
+        </div>
+        <p class="loading-text"> ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ </p>
+        <div class="loading-bar"></div>
+    </div>
+
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo"><img src="assets/images/about images/without bg logo.png" alt="" srcset="" style="width: 50px;"></div>
+            <div class="logo-2"><img src="assets/images/about images/without bg logo.png" alt="" srcset="" style="width: 50px;"></div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li class="dropdown">
-                    <a href="#about" class="dropdown-toggle">About <span class="arrow">▼</span></a>
+                    <a href="about.html" class="dropdown-toggle">About <span class="arrow">▼</span></a>
                     <!-- <ul class="dropdown-menu">
                         <li><a href="about.html">Event Overview</a></li>
                         <li><a href="#about">Mission & Vision</a></li>
@@ -75,7 +184,7 @@
                 </li> -->
 
                 <!-- <li><a href="#contact">Contact</a></li> -->
-                <li><a href="final payment getway razorpay/reg-final.html" class="nav-cta">Register Now</a></li>
+                <li><a href="final payment getway/Registration journalist.html" class="nav-cta">Register Now</a></li>
                 <!-- un comment this for google translate widget -->
 
                 <div id="google_translate_element"></div>
@@ -181,53 +290,7 @@
         </div>
     </section>
 
-    <!-- Highlights Section -->
-    <!-- <section id="highlights " class="highlights ">
-        <div class="section-header scroll-animate ">
-            <p class="section-subtitle ">What to Expect</p>
-            <h2 class="section-title ">Event Highlights</h2>
-            <p class="section-description ">
-                Immerse yourself in a curated experience designed to inspire, educate, and connect
-            </p>
-        </div>
-        <div class="highlights-grid ">
-            <div class="highlight-card scroll-animate ">
-                <div class="highlight-icon ">🎭</div>
-                <h3>Cultural Performances</h3>
-                <p>Experience mesmerizing classical and contemporary performances by renowned artists celebrating Karnataka's rich artistic heritage</p>
-            </div>
-            <div class="highlight-card scroll-animate ">
-                <div class="highlight-icon ">💡</div>
-                <h3>Innovation Showcase</h3>
-                <p>Discover cutting-edge technologies and innovations preserving and promoting cultural heritage in the digital age</p>
-            </div>
-            <div class="highlight-card scroll-animate ">
-                <div class="highlight-icon ">🎨</div>
-                <h3>Art Exhibitions</h3>
-                <p>Explore stunning exhibitions featuring traditional crafts, contemporary art, and interactive installations</p>
-            </div>
-            <div class="highlight-card scroll-animate ">
-                <div class="highlight-icon ">📚</div>
-                <h3>Heritage Talks</h3>
-                <p>Engage with historians and scholars in enlightening discussions about Bidar's magnificent historical legacy</p>
-            </div>
-            <div class="highlight-card scroll-animate ">
-                <div class="highlight-icon ">🍽️</div>
-                <h3>Culinary Journey</h3>
-                <p>Savor authentic Bidriware-plated delicacies and regional cuisine from master chefs across Karnataka</p>
-            </div>
-            <div class="highlight-card scroll-animate ">
-                <div class="highlight-icon ">🤝</div>
-                <h3>Networking Sessions</h3>
-                <p>Connect with like-minded individuals, industry leaders, and cultural enthusiasts from around the globe</p>
-            </div>
-        </div>
-        <div class="section-button-container ">
-            <a href="about.html " class="section-btn ">
-                <span>Explore All Programs →</span>
-            </a>
-        </div>
-    </section> -->
+
 
     <!-- Special Guests Section -->
     <section id="guests ">
@@ -463,6 +526,42 @@
 
     <script src="assets/js/translate.js "></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit "></script>
+
+
+
+    <script>
+        window.addEventListener("load", function() {
+            setTimeout(() => {
+                document.getElementById("logoLoader").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("logoLoader").style.display = "none";
+                }, 1000); // Wait for fade-out transition
+            }, 2500); // Display for 2.5 seconds
+        });
+
+
+        // and in your HTML file
+        window.addEventListener("load", function() {
+            setTimeout(() => {
+                document.getElementById("logoLoader").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("logoLoader").style.display = "none";
+                }, 1000); // Fade-out transition
+            }, 3000); // Display for 3 seconds
+        });
+
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('fade-out');
+                document.getElementById('mainContent').classList.add('show');
+
+                // Remove loader from DOM after fade out completes
+                setTimeout(function() {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 2500); // Total animation duration (2.5s)
+        });
+    </script>
 
 </body>
 

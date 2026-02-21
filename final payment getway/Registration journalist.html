@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journalist Registration | Press Conference 2026</title>
+
+    <style>
+        /* ====================
+           PROFESSIONAL DESIGN
+           ==================== */
+        
+         :root {
+            --primary: #1a1a2e;
+            --accent: #d4af37;
+            --text: #2c2c2c;
+            --bg: #faf9f6;
+            --white: #ffffff;
+            --border: #e5e5e5;
+            --success: #2d6a4f;
+            --error: #c1121f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: linear-gradient(135deg, #faf9f6 0%, #f0ede5 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--accent);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .progress {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-step {
+            width: 40px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        
+        .progress-step.active {
+            background: var(--accent);
+        }
+        
+        .form-section {
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .required {
+            color: var(--error);
+        }
+        
+        .optional {
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            transition: 0.3s;
+            outline: none;
+            font-family: inherit;
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        input:valid:not(:placeholder-shown) {
+            border-color: var(--success);
+        }
+        
+        input:invalid:not(:placeholder-shown) {
+            border-color: var(--error);
+        }
+        
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        
+        .helper-text {
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 0.25rem;
+        }
+        /* Payment Section */
+        
+        .amount-box {
+            background: linear-gradient(135deg, var(--primary), #2a2a4e);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .amount-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .amount-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+        
+        .qr-container {
+            background: white;
+            padding: 2rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .qr-placeholder {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .qr-container img {
+            max-width: 300px;
+            display: none;
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .instructions h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .instructions ol {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .file-upload {
+            position: relative;
+        }
+        
+        .file-upload input {
+            display: none;
+        }
+        
+        .file-label {
+            display: block;
+            padding: 1rem;
+            background: white;
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .file-label:hover {
+            border-color: var(--accent);
+            background: #fffef8;
+        }
+        
+        .file-name {
+            font-size: 0.875rem;
+            color: var(--success);
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), #2a2a4e);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--border);
+            box-shadow: none;
+            margin-top: 1rem;
+        }
+        
+        .error-msg,
+        .success-msg {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .error-msg {
+            background: #fff5f5;
+            color: var(--error);
+            border-left: 4px solid var(--error);
+        }
+        
+        .success-msg {
+            background: #f0fdf4;
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+        
+        .error-msg.show,
+        .success-msg.show {
+            display: block;
+            animation: slideDown 0.3s;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .card {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .amount-value {
+                font-size: 2.5rem;
+            }
+            .qr-placeholder {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="badge">Press Conference 2026</div>
+                <h1>Journalist Registration</h1>
+                <p class="subtitle">Official media accreditation system</p>
+            </div>
+
+            <div class="progress">
+                <div class="progress-step active" id="step1"></div>
+                <div class="progress-step" id="step2"></div>
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section active" id="formSection">
+                <form id="regForm">
+                    <div class="form-group">
+                        <label>Name<span class="required">*</span></label>
+                        <input type="text" id="name" placeholder="Enter your full name" required minlength="2">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Father's/Mother's Name<span class="optional">(optional)</span></label>
+                        <input type="text" id="parentName" placeholder="Enter parent's name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Newspaper Name<span class="required">*</span></label>
+                        <input type="text" id="newspaper" placeholder="Enter newspaper/media house name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Designation<span class="required">*</span></label>
+                        <select id="designation" required>
+                            <option value="">Select designation</option>
+                            <option value="Reporter">Reporter</option>
+                            <option value="Correspondent">Correspondent</option>
+                            <option value="Photographer">Photographer</option>
+                            <option value="Camera Person">Camera Person</option>
+                            <option value="Editor">Editor</option>
+                            <option value="Sub-Editor">Sub-Editor</option>
+                            <option value="Freelance Journalist">Freelance Journalist</option>
+                            <option value="Bureau Chief">Bureau Chief</option>
+                            <option value="News Anchor">News Anchor</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Place of Work<span class="required">*</span></label>
+                        <input type="text" id="placeOfWork" placeholder="Enter your city/location" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>K.K.P.S. Identification Card Number<span class="required">*</span></label>
+                        <input type="text" id="kkpsId" placeholder="Enter K.K.P.S. ID" required>
+                        <div class="helper-text">Karnataka Komu Patrakaratara Samgha ID</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mobile Number<span class="required">*</span></label>
+                        <input type="tel" id="mobile" placeholder="10-digit mobile" required pattern="[0-9]{10}" maxlength="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email ID<span class="required">*</span></label>
+                        <input type="email" id="email" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div id="formError" class="error-msg"></div>
+
+                    <button type="submit" class="btn">Proceed to Payment</button>
+                </form>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="form-section" id="paymentSection">
+                <div class="amount-box">
+                    <div class="amount-label">Registration Fee</div>
+                    <div class="amount-value">₹300</div>
+                </div>
+
+                <div class="qr-container">
+                    <img src="qr.jpeg" alt="QR Code" id="qrImg">
+                    <div class="qr-placeholder" id="qrPlaceholder">
+                        📱 Your bank QR code<br><br>
+                        <small>Add 'qr-code.png' image</small>
+                    </div>
+                </div>
+
+                <div class="instructions">
+                    <h3>📱 Payment Instructions</h3>
+                    <ol>
+                        <li>Scan QR with Google Pay/PhonePe/Paytm</li>
+                        <li>Pay <strong>exactly ₹300.00</strong></li>
+                        <li>Note the <strong>12-digit UTR number</strong></li>
+                        <li>Take screenshot of payment</li>
+                        <li>Enter details below</li>
+                    </ol>
+                </div>
+
+                <form id="payForm">
+                    <div class="form-group">
+                        <label>UTR Number (12 digits)<span class="required">*</span></label>
+                        <input type="text" id="utr" placeholder="402912345678" required pattern="[0-9]{12}" maxlength="12">
+                        <div class="helper-text">Transaction ID from payment app</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Screenshot<span class="required">*</span></label>
+                        <div class="file-upload">
+                            <input type="file" id="screenshot" accept="image/*" required>
+                            <label for="screenshot" class="file-label">
+                                📷 Click to upload<br>
+                                <small>JPG/PNG (Max 5MB)</small>
+                            </label>
+                            <div id="fileName" class="file-name"></div>
+                        </div>
+                    </div>
+
+                    <div id="payError" class="error-msg"></div>
+                    <div id="paySuccess" class="success-msg"></div>
+
+                    <button type="submit" class="btn" id="submitBtn">Confirm Payment</button>
+                    <button type="button" class="btn btn-secondary" id="backBtn">← Back</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🔴 CONFIGURATION
+        const CONFIG = {
+            googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbxDijE4kRwxQLxMJ143cpMV61_MpRmFoOjQZsa_xpnYUKgmwahciYwRryLi-EMzGrwcAg/exec',
+            amount: 300
+        };
+
+        let regData = {
+            regId: '',
+            name: '',
+            parentName: '',
+            newspaper: '',
+            designation: '',
+            placeOfWork: '',
+            kkpsId: '',
+            mobile: '',
+            email: '',
+            amount: 300,
+            utr: '',
+            screenshot: '',
+            timestamp: ''
+        };
+
+        // Elements
+        const formSec = document.getElementById('formSection');
+        const paySec = document.getElementById('paymentSection');
+        const regForm = document.getElementById('regForm');
+        const payForm = document.getElementById('payForm');
+        const formErr = document.getElementById('formError');
+        const payErr = document.getElementById('payError');
+        const paySucc = document.getElementById('paySuccess');
+        const submitBtn = document.getElementById('submitBtn');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+
+        // QR Image
+        const qrImg = document.getElementById('qrImg');
+        const qrPlace = document.getElementById('qrPlaceholder');
+        qrImg.onerror = () => {
+            qrImg.style.display = 'none';
+            qrPlace.style.display = 'flex';
+        };
+        qrImg.onload = () => {
+            qrImg.style.display = 'block';
+            qrPlace.style.display = 'none';
+        };
+
+        // Utilities
+        function genId() {
+            return 'REG-2026-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 5).toUpperCase();
+        }
+
+        function showErr(el, msg) {
+            el.textContent = msg;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 5000);
+        }
+
+        function showSucc(el, msg) {
+            el.textContent = msg;
+            el.classList.add('show');
+        }
+
+        function showSec(sec) {
+            formSec.classList.remove('active');
+            paySec.classList.remove('active');
+            sec.classList.add('active');
+            if (sec === paySec) {
+                step2.classList.add('active');
+            } else {
+                step2.classList.remove('active');
+            }
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Form validation
+        regForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const newspaper = document.getElementById('newspaper').value.trim();
+            const designation = document.getElementById('designation').value;
+            const placeOfWork = document.getElementById('placeOfWork').value.trim();
+            const kkpsId = document.getElementById('kkpsId').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (!name || name.length < 2) return showErr(formErr, 'Enter valid name');
+            if (!newspaper) return showErr(formErr, 'Enter newspaper name');
+            if (!designation) return showErr(formErr, 'Select designation');
+            if (!placeOfWork) return showErr(formErr, 'Enter place of work');
+            if (!kkpsId) return showErr(formErr, 'Enter K.K.P.S. ID');
+            if (!/^[0-9]{10}$/.test(mobile)) return showErr(formErr, 'Enter valid 10-digit mobile');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr(formErr, 'Enter valid email');
+
+            regData.regId = genId();
+            regData.name = name;
+            regData.parentName = document.getElementById('parentName').value.trim() || 'Not provided';
+            regData.newspaper = newspaper;
+            regData.designation = designation;
+            regData.placeOfWork = placeOfWork;
+            regData.kkpsId = kkpsId;
+            regData.mobile = mobile;
+            regData.email = email;
+            regData.timestamp = new Date().toISOString();
+
+            console.log('✅ Form data:', regData);
+            showSec(paySec);
+        });
+
+        // File upload
+        document.getElementById('screenshot').addEventListener('change', function(e) {
+            if (e.target.files[0]) {
+                document.getElementById('fileName').textContent = '✓ ' + e.target.files[0].name;
+            }
+        });
+
+        // Payment submission
+        payForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const utr = document.getElementById('utr').value.trim();
+            const file = document.getElementById('screenshot').files[0];
+
+            if (!/^[0-9]{12}$/.test(utr)) return showErr(payErr, 'Enter valid 12-digit UTR');
+            if (!file) return showErr(payErr, 'Upload payment screenshot');
+            if (file.size > 5 * 1024 * 1024) return showErr(payErr, 'File too large (max 5MB)');
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+
+            try {
+                const base64 = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+
+                regData.utr = utr;
+                regData.screenshot = base64;
+
+                console.log('📤 Sending to server...');
+
+                await fetch(CONFIG.googleSheetsUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(regData)
+                });
+
+                console.log('✅ Sent successfully!');
+
+                sessionStorage.setItem('regData', JSON.stringify(regData));
+                showSucc(paySucc, '✓ Confirmed! Redirecting...');
+
+                setTimeout(() => {
+                    window.location.href = 'receipt-journalist.html';
+                }, 2000);
+
+            } catch (err) {
+                console.error('❌ Error:', err);
+                showErr(payErr, 'Failed. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Confirm Payment';
+            }
+        });
+
+        // Back button
+        document.getElementById('backBtn').addEventListener('click', () => showSec(formSec));
+
+        // Input restrictions
+        document.getElementById('mobile').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+        });
+
+        document.getElementById('utr').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 12);
+        });
+
+        console.log('%c🚀 Journalist Registration', 'font-size:20px; font-weight:bold; color:#16213e');
+    </script>
+</body>
+
+</html>
