@@ -11,6 +11,7 @@
             --primary: #1a1a2e;
             --accent: #d4af37;
             --success: #2d6a4f;
+            --whatsapp: #25D366;
             --text: #2c2c2c;
             --bg: #faf9f6;
             --border: #e5e5e5;
@@ -157,13 +158,6 @@
             padding-right: 2.5rem;
         }
         
-        input[type="date"] {
-            background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 6h12M5 2v2M11 2v2M3 4h10a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z' stroke='%23666' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem;
-        }
-        
         .radio-group {
             display: flex;
             gap: 1.5rem;
@@ -218,6 +212,20 @@
             background: #ccc;
             cursor: not-allowed;
             transform: none;
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(135deg, var(--whatsapp), #1ea952);
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .btn-whatsapp:hover {
+            background: linear-gradient(135deg, #1ea952, var(--whatsapp));
         }
         
         .message {
@@ -299,6 +307,20 @@
             margin-bottom: 0.25rem;
         }
         
+        .whatsapp-box {
+            background: #e7f9f0;
+            border: 2px solid var(--whatsapp);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .whatsapp-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
         @media (max-width: 640px) {
             .card {
                 padding: 1.5rem;
@@ -324,7 +346,7 @@
             </div>
 
             <div class="info-box">
-                <strong>📝 Registration Information</strong> Please fill in all required details. We'll use this information for event planning and accommodation.
+                <strong>📝 Registration Information</strong> After successful registration, you'll get a WhatsApp group link to join our media community!
             </div>
 
             <!-- Form Section -->
@@ -338,14 +360,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Father's/Mother's Name<span class="optional">(optional)</span></label>
+                        <label>Father's/Mother's/ Husband Name<span class="optional">(optional)</span></label>
                         <input type="text" id="parentName" placeholder="Enter parent's name">
                     </div>
 
                     <div class="section-title">Professional Information</div>
 
                     <div class="form-group">
-                        <label>Newspaper Name<span class="required">*</span></label>
+                        <label>News paper Name<span class="required">*</span></label>
                         <input type="text" id="newspaper" placeholder="Enter newspaper/media house name" required>
                     </div>
 
@@ -366,15 +388,73 @@
                         </select>
                     </div>
 
+                    <div class="section-title">Location Details</div>
+
                     <div class="form-group">
-                        <label>Place of Work<span class="required">*</span></label>
-                        <input type="text" id="placeOfWork" placeholder="Enter your city/location" required>
+                        <label>Country<span class="required">*</span></label>
+                        <select id="country" required>
+                            <option value="">Select country</option>
+                            <option value="India" selected>India</option>
+                            <option value="USA">USA</option>
+                            <option value="UK">UK</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Canada">Canada</option>
+
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>State<span class="required">*</span></label>
+                        <select id="state" required>
+                            <option value="">Select state</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka" selected>Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Delhi">Delhi</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>District<span class="required">*</span></label>
+                        <input type="text" id="district" placeholder="Enter your district" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>City/Town/Your place of work<span class="required">*</span></label>
+                        <input type="text" id="city" placeholder="Your place of work" required>
+                        <div class="helper-text">Your place of work</div>
                     </div>
 
                     <div class="form-group">
                         <label>K.K.P.S. Identification Card Number<span class="required">*</span></label>
                         <input type="text" id="kkpsId" placeholder="Enter K.K.P.S. ID" required>
-                        <div class="helper-text">Karnataka Komu Patrakaratara Samgha ID</div>
+                        <!-- <div class="helper-text">Karnataka Komu Patrakaratara Samgha ID</div> -->
                     </div>
 
                     <div class="section-title">Contact Information</div>
@@ -428,9 +508,25 @@
                 </h2>
                 <div class="success-msg show">
                     <strong>Thank you for registering!</strong><br><br> Your details have been recorded successfully.<br> Registration ID: <strong id="displayRegId">-</strong><br><br>
-                    <span id="roomConfirm"></span> We will contact you with further details about the event.
+                    <span id="roomConfirm"></span>
                 </div>
-                <button class="btn" onclick="location.reload()">
+
+                <!-- WhatsApp Group Section -->
+                <div class="whatsapp-box">
+                    <div class="whatsapp-icon">💬</div>
+                    <h3 style="color: var(--whatsapp); margin-bottom: 0.5rem;">Join Our WhatsApp Group!</h3>
+                    <p style="font-size: 0.875rem; color: #666; margin-bottom: 1rem;">
+                        Connect with fellow journalists and get event updates
+                    </p>
+                    <a href="https://chat.whatsapp.com/YOUR_GROUP_INVITE_LINK" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                        <span style="font-size: 1.5rem;">📱</span> Join WhatsApp Group
+                    </a>
+                    <p style="font-size: 0.75rem; color: #999; margin-top: 0.5rem;">
+                        Click above to join instantly
+                    </p>
+                </div>
+
+                <button class="btn" onclick="location.reload()" style="margin-top: 1.5rem;">
                     Register Another Journalist
                 </button>
             </div>
@@ -440,7 +536,9 @@
     <script>
         // 🔴 CONFIGURATION
         const CONFIG = {
-            googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbwMIUhZuCv5mFWmnp8T3gBJzOj_zAeAmwojxwY1_7cn3S-lQ0phnc1vZDIK9Ciggbs/exec',
+            googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbxyg8Hxr5W7Sz7Jw-cZn10SJBAqqyDB7cedVBxetSw8_11t9CQikILv693eTS9YyH-O/exec',
+            // 🔴 IMPORTANT: Replace with your WhatsApp group invite link
+            whatsappGroupLink: 'https://chat.whatsapp.com/LSeYxxSfIDe12K554LLjcF?mode=hq1tcla'
         };
 
         // Elements
@@ -474,6 +572,10 @@
             successContent.classList.add('show');
             displayRegId.textContent = regId;
 
+            // Update WhatsApp link
+            const whatsappBtn = document.querySelector('.btn-whatsapp');
+            whatsappBtn.href = CONFIG.whatsappGroupLink;
+
             if (roomRequired === 'Yes') {
                 roomConfirm.innerHTML = '🏨 <strong>Room requested:</strong> We will arrange accommodation for you.<br><br>';
             } else {
@@ -486,7 +588,10 @@
             const name = document.getElementById('name').value.trim();
             const newspaper = document.getElementById('newspaper').value.trim();
             const designation = document.getElementById('designation').value;
-            const placeOfWork = document.getElementById('placeOfWork').value.trim();
+            const country = document.getElementById('country').value;
+            const state = document.getElementById('state').value;
+            const district = document.getElementById('district').value.trim();
+            const city = document.getElementById('city').value.trim();
             const kkpsId = document.getElementById('kkpsId').value.trim();
             const mobile = document.getElementById('mobile').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -508,8 +613,23 @@
                 return false;
             }
 
-            if (!placeOfWork) {
-                showError('Please enter your place of work');
+            if (!country) {
+                showError('Please select your country');
+                return false;
+            }
+
+            if (!state) {
+                showError('Please select your state');
+                return false;
+            }
+
+            if (!district) {
+                showError('Please enter your district');
+                return false;
+            }
+
+            if (!city) {
+                showError('Please enter your city/town');
                 return false;
             }
 
@@ -559,7 +679,10 @@
                 parentName: document.getElementById('parentName').value.trim() || 'Not provided',
                 newspaper: document.getElementById('newspaper').value.trim(),
                 designation: document.getElementById('designation').value,
-                placeOfWork: document.getElementById('placeOfWork').value.trim(),
+                country: document.getElementById('country').value,
+                state: document.getElementById('state').value,
+                district: document.getElementById('district').value.trim(),
+                city: document.getElementById('city').value.trim(),
                 kkpsId: document.getElementById('kkpsId').value.trim(),
                 mobile: document.getElementById('mobile').value.trim(),
                 email: document.getElementById('email').value.trim(),
@@ -604,8 +727,8 @@
             });
         });
 
-        console.log('%c📝 Journalist Registration Form (v2.0)', 'font-size:18px; font-weight:bold; color:#1a1a2e');
-        console.log('%c✨ Now with Arrival Date & Room Requirements', 'font-size:14px; color:#d4af37');
+        console.log('%c📝 Journalist Registration (v3.0)', 'font-size:18px; font-weight:bold; color:#1a1a2e');
+        console.log('%c✨ With Location Details & WhatsApp Integration', 'font-size:14px; color:#25D366');
     </script>
 </body>
 
