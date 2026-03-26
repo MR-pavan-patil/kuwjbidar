@@ -6,10 +6,7 @@ const dropdowns = document.querySelectorAll('.dropdown');
 // Notification Banner with Rotating Messages
 const notifications = [
     "ಬೀದರ ನಗರದಲ್ಲಿ ಏಪ್ರಿಲ್ 11 ಹಾಗೂ 12ರಂದು ನಡೆಯಲಿರುವ 40ನೇ ರಾಜ್ಯ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನಕ್ಕಾಗಿ *ಆನ್ ಲೈನ್ ನೋಂದಣಿ ಮಾಡಿಕೊಂಡಲ್ಲಿ ಮಾತ್ರ ಕೊಠಡಿ (ರೂಮ್) ವ್ಯವಸ್ಥೆ ಆಗಲಿದೆ*. ಆದಷ್ಟು ಬೇಗ ಆನ್ ಲೈನ್ ನೋಂದಣಿ ಮಾಡಿಕೊಳ್ಳಲು ಕೋರಲಾಗಿದೆ. *ಮಾರ್ಚ್ 28 ಆನ್ ಲೈನ್ ನೋಂದಣಿಗೆ ಕೊನೆಯ ದಿನವಾಗಿದೆ.*",
-    // "📢 New keynote speaker announced - Dr. Anjali Sharma joins us!",
-    // "🎨 Workshop registrations are now open - Limited seats available",
-    // "🏛️ Heritage tour of Bidar Fort included with all passes",
-    // "⭐ Special discount for students and cultural organizations"
+
 ];
 
 let currentNotificationIndex = 0;
