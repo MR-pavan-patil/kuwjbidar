@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KUWJ Bidar — Member Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080b0e;
+  --surface:#0f1317;
+  --card:#141920;
+  --card2:#1a2128;
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.1);
+  --green:#22c55e;
+  --green-dim:rgba(34,197,94,0.1);
+  --green-glow:rgba(34,197,94,0.25);
+  --green-border:rgba(34,197,94,0.2);
+  --amber:#f59e0b;
+  --amber-dim:rgba(245,158,11,0.1);
+  --red:#ef4444;
+  --text:#f1f5f9;
+  --muted:#64748b;
+  --dim:#334155;
+  --r:14px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+
+/* ─── NOISE TEXTURE ─── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4
+}
+
+/* ─── BACKGROUND GLOW ─── */
+.glow-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% -10%, rgba(34,197,94,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 110%, rgba(34,197,94,0.04) 0%, transparent 60%);
+}
+
+/* ─── HEADER ─── */
+header{
+  position:relative;z-index:10;
+  padding:0 32px;
+  border-bottom:1px solid var(--border);
+  background:rgba(8,11,14,0.8);
+  backdrop-filter:blur(24px);
+}
+.header-inner{
+  max-width:1080px;margin:0 auto;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{
+  width:38px;height:38px;border-radius:10px;
+  background:var(--green-dim);border:1px solid var(--green-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px
+}
+.brand-name{font-family:'Instrument Serif',serif;font-size:18px;color:var(--text);letter-spacing:-0.2px}
+.brand-tagline{font-size:11px;color:var(--muted);letter-spacing:0.5px;margin-top:1px}
+.live-chip{
+  display:flex;align-items:center;gap:6px;
+  background:var(--green-dim);border:1px solid var(--green-border);
+  color:var(--green);font-size:11px;font-weight:600;
+  padding:5px 12px;border-radius:50px;letter-spacing:0.3px;
+  text-transform:uppercase
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ─── MAIN ─── */
+main{flex:1;position:relative;z-index:1;padding:56px 24px 48px}
+
+/* ─── SEARCH SCREEN ─── */
+#searchScreen{
+  max-width:480px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+}
+
+/* Upload Banner */
+#uploadBanner{
+  width:100%;
+  background:rgba(245,158,11,0.06);
+  border:1px solid rgba(245,158,11,0.2);
+  border-radius:12px;padding:14px 18px;
+  display:none;align-items:center;gap:12px;
+  animation:fadeUp .4s ease both;
+}
+#uploadBanner .ub-icon{font-size:20px}
+#uploadBanner .ub-text{flex:1;font-size:13px;color:#94a3b8;line-height:1.4}
+#uploadBanner .ub-text strong{color:var(--amber);display:block;font-size:12px;margin-bottom:2px}
+.upload-btn-wrap{position:relative}
+#csvFileInput{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+.upload-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--amber);color:#000;
+  border:none;border-radius:8px;padding:8px 16px;
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  cursor:pointer;white-space:nowrap;letter-spacing:0.2px;
+  pointer-events:none
+}
+#dataStatus{
+  width:100%;text-align:center;font-size:12px;color:var(--green);
+  display:none;animation:fadeUp .3s ease both;
+}
+#dataStatus span{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--green-dim);border:1px solid var(--green-border);
+  padding:6px 14px;border-radius:50px
+}
+
+/* Search Card */
+.search-card{
+  width:100%;
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:22px;
+  padding:44px 38px 38px;
+  box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(34,197,94,0.04);
+  animation:fadeUp .5s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.card-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:600;color:var(--green);
+  text-transform:uppercase;letter-spacing:1.5px;margin-bottom:18px;
+}
+.card-eyebrow::before{content:'';width:20px;height:1px;background:var(--green);opacity:.5}
+.card-eyebrow::after{content:'';width:20px;height:1px;background:var(--green);opacity:.5}
+
+h1.card-title{
+  font-family:'Instrument Serif',serif;
+  font-size:32px;color:var(--text);
+  letter-spacing:-0.5px;line-height:1.1;margin-bottom:10px;
+}
+h1.card-title em{color:var(--green);font-style:italic}
+
+.card-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:32px}
+
+/* Input */
+.field-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.input-wrap{
+  display:flex;align-items:center;
+  background:var(--surface);
+  border:1.5px solid var(--border2);
+  border-radius:10px;overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;margin-bottom:12px;
+}
+.input-wrap:focus-within{border-color:var(--green);box-shadow:0 0 0 3px var(--green-dim)}
+.inp-prefix{
+  padding:0 14px;color:var(--dim);font-size:13px;font-weight:600;
+  border-right:1px solid var(--border2);height:100%;display:flex;align-items:center;
+  background:rgba(255,255,255,0.02)
+}
+#phoneInput{
+  flex:1;background:transparent;border:none;outline:none;
+  color:var(--text);font-family:'Outfit',sans-serif;
+  font-size:17px;font-weight:500;padding:15px 16px;
+  letter-spacing:2px
+}
+#phoneInput::placeholder{color:var(--dim);font-size:14px;letter-spacing:.5px;font-weight:400}
+
+/* Search Button */
+.search-btn{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--green);color:#000;
+  border:none;border-radius:10px;padding:15px 24px;
+  font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;transition:all .2s;letter-spacing:.3px;
+}
+.search-btn:hover{background:#16a34a;transform:translateY(-1px);box-shadow:0 8px 28px var(--green-glow)}
+.search-btn:active{transform:translateY(0)}
+.search-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-arrow{transition:transform .2s}
+.search-btn:hover .btn-arrow{transform:translateX(4px)}
+
+.hint-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:18px;font-size:11.5px;color:var(--dim)}
+
+/* ─── LOADER ─── */
+#loader{display:none;flex-direction:column;align-items:center;gap:14px;padding:10px 0}
+.spin{
+  width:38px;height:38px;border:2.5px solid var(--border2);
+  border-top-color:var(--green);border-radius:50%;
+  animation:spin .7s linear infinite
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loader p{font-size:13px;color:var(--muted)}
+
+/* ─── ERROR CARD ─── */
+#errorCard{
+  display:none;width:100%;
+  background:rgba(239,68,68,.06);
+  border:1px solid rgba(239,68,68,.18);
+  border-radius:16px;padding:32px;text-align:center;
+  animation:fadeUp .4s ease both;
+}
+.err-ico{font-size:38px;margin-bottom:12px}
+#errorCard h3{font-family:'Instrument Serif',serif;font-size:22px;margin-bottom:8px}
+#errorCard p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:22px}
+.retry-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--card2);border:1px solid var(--border2);
+  color:var(--text);border-radius:9px;padding:11px 22px;
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .2s
+}
+.retry-btn:hover{border-color:var(--green);color:var(--green)}
+
+/* ─── RESULT SECTION ─── */
+#resultSection{display:none;max-width:980px;margin:0 auto;animation:fadeUp .5s ease both}
+
+/* Top bar */
+.result-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.back-btn{
+  display:flex;align-items:center;gap:8px;
+  background:var(--card);border:1px solid var(--border2);
+  color:var(--muted);border-radius:9px;padding:9px 16px;
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .2s
+}
+.back-btn:hover{border-color:var(--green);color:var(--green)}
+.result-ts{font-size:12px;color:var(--dim)}
+
+/* Hero Card */
+.hero-card{
+  background:linear-gradient(135deg,rgba(34,197,94,0.08) 0%, var(--card) 50%);
+  border:1px solid var(--green-border);
+  border-radius:20px;padding:32px 36px;
+  display:flex;align-items:center;gap:24px;
+  margin-bottom:20px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.hero-card::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle, var(--green-dim) 0%, transparent 70%);
+  pointer-events:none
+}
+.avatar{
+  width:70px;height:70px;border-radius:50%;flex-shrink:0;
+  background:var(--green-dim);border:2px solid var(--green);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Instrument Serif',serif;font-size:26px;color:var(--green);
+}
+.hero-info{flex:1;min-width:0}
+.hero-name{font-family:'Instrument Serif',serif;font-size:26px;color:var(--text);letter-spacing:-.3px;margin-bottom:4px}
+.hero-meta{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.reg-id-box{
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:9px;padding:10px 16px;text-align:right
+}
+.reg-id-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+.reg-id-val{font-family:'Instrument Serif',serif;font-size:20px;color:var(--green);margin-top:2px}
+
+/* Status badges */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:5px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px}
+.badge-green{background:var(--green-dim);border:1px solid var(--green-border);color:var(--green)}
+.badge-amber{background:var(--amber-dim);border:1px solid rgba(245,158,11,.2);color:var(--amber)}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+/* Info Grid */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;transition:border-color .2s,transform .2s}
+.info-card:hover{border-color:rgba(34,197,94,0.15);transform:translateY(-1px)}
+.ic-head{display:flex;align-items:center;gap:9px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.ic-head-icon{
+  width:30px;height:30px;border-radius:8px;
+  background:var(--green-dim);border:1px solid var(--green-border);
+  display:flex;align-items:center;justify-content:center;font-size:13px;
+}
+.ic-head h3{font-size:12px;font-weight:700;color:var(--text);letter-spacing:.3px;text-transform:uppercase}
+.ic-rows{display:flex;flex-direction:column;gap:13px}
+.ic-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ic-label{font-size:11px;color:var(--muted);flex-shrink:0;display:flex;align-items:center;gap:5px}
+.ic-val{font-size:12.5px;font-weight:500;color:var(--text);text-align:right;word-break:break-word}
+.ic-val-green{font-family:'Instrument Serif',serif;font-size:15px;color:var(--green)}
+
+/* Wide card spans all columns */
+.span-all{grid-column:1/-1}
+
+/* Reg card horizontal */
+.reg-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px 28px}
+.reg-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.reg-item{text-align:center;padding:16px;background:var(--surface);border-radius:10px;border:1px solid var(--border)}
+.reg-item-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.reg-item-val{font-family:'Instrument Serif',serif;font-size:20px;color:var(--text)}
+.reg-item-val.green{color:var(--green)}
+
+.result-foot{text-align:center;font-size:11.5px;color:var(--dim);padding:8px 0 4px;display:flex;align-items:center;justify-content:center;gap:6px}
+
+/* ─── FOOTER ─── */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:18px 24px;text-align:center;font-size:11.5px;color:var(--dim)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:780px){
+  .info-grid{grid-template-columns:1fr 1fr}
+  .reg-inner{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:520px){
+  main{padding:36px 16px 40px}
+  .search-card{padding:32px 22px 28px}
+  h1.card-title{font-size:26px}
+  .hero-card{padding:24px 20px}
+  .hero-name{font-size:21px}
+  .info-grid{grid-template-columns:1fr}
+  .reg-inner{grid-template-columns:1fr}
+  .hero-right{align-items:flex-start}
+  .brand-tagline{display:none}
+  header{padding:0 18px}
+}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.shake{animation:shake .4s ease}
+</style>
+</head>
+<body>
+
+<div class="glow-bg"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-icon">📰</div>
+      <div>
+        <div class="brand-name">KUWJ Bidar</div>
+        <div class="brand-tagline">Karnataka Union of Working Journalists</div>
+      </div>
+    </div>
+    <div class="live-chip">
+      <span class="dot"></span> Live Portal
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- SEARCH SCREEN -->
+  <div id="searchScreen">
+
+    <!-- CSV Upload Banner (shown when auto-load fails) -->
+    <div id="uploadBanner">
+      <div class="ub-icon">📂</div>
+      <div class="ub-text">
+        <strong>CSV not found automatically</strong>
+        Select your <code>data.csv</code> file to load data
+      </div>
+      <div class="upload-btn-wrap">
+        <input type="file" id="csvFileInput" accept=".csv"/>
+        <div class="upload-btn">📤 Upload CSV</div>
+      </div>
+    </div>
+
+    <!-- Data loaded status -->
+    <div id="dataStatus">
+      <span>✅ <span id="recordCount">0</span> records loaded</span>
+    </div>
+
+    <!-- Main Search Card -->
+    <div class="search-card">
+      <div class="card-eyebrow">Member Portal</div>
+      <h1 class="card-title">Find Your<br/><em>Registration</em></h1>
+      <p class="card-desc">Enter your registered mobile number to instantly access your complete registration details.</p>
+
+      <div class="field-label">Mobile Number</div>
+      <div class="input-wrap">
+        <div class="inp-prefix">+91</div>
+        <input type="tel" id="phoneInput" placeholder="Enter 10-digit number" maxlength="10" inputmode="numeric" autocomplete="off"/>
+      </div>
+
+      <button class="search-btn" id="searchBtn" onclick="searchUser()">
+        Search Record <span class="btn-arrow">→</span>
+      </button>
+
+      <div class="hint-row">🔒 Secure · Read-only · Your data only</div>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader">
+      <div class="spin"></div>
+      <p>Searching records…</p>
+    </div>
+
+    <!-- Error -->
+    <div id="errorCard">
+      <div class="err-ico">🔍</div>
+      <h3>No Record Found</h3>
+      <p>No registration matches this phone number.<br/>Please verify and try again.</p>
+      <button class="retry-btn" onclick="resetSearch()">← Try Again</button>
+    </div>
+
+  </div>
+
+  <!-- RESULT SECTION -->
+  <div id="resultSection">
+
+    <div class="result-topbar">
+      <button class="back-btn" onclick="resetSearch()">← New Search</button>
+      <div class="result-ts" id="resultTs"></div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="hero-card">
+      <div class="avatar" id="rAvatar"></div>
+      <div class="hero-info">
+        <div class="hero-name" id="rName"></div>
+        <div class="hero-meta">
+          <span>📰 <span id="rNewspaper"></span></span>
+          <span>🏷️ <span id="rDesig"></span></span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div id="rStatusBadge"></div>
+        <div class="reg-id-box">
+          <div class="reg-id-label">Reg ID</div>
+          <div class="reg-id-val" id="rRegId"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Cards Grid -->
+    <div class="info-grid">
+
+      <!-- Personal -->
+      <div class="info-card">
+        <div class="ic-head">
+          <div class="ic-head-icon">👤</div>
+          <h3>Personal</h3>
+        </div>
+        <div class="ic-rows">
+          <div class="ic-row"><span class="ic-label">Full Name</span><span class="ic-val" id="iName"></span></div>
+          <div class="ic-row"><span class="ic-label">Phone</span><span class="ic-val" id="iPhone"></span></div>
+          <div class="ic-row"><span class="ic-label">Parent</span><span class="ic-val" id="iParent"></span></div>
+          <div class="ic-row"><span class="ic-label">Email</span><span class="ic-val" id="iEmail"></span></div>
+        </div>
+      </div>
+
+      <!-- Professional -->
+      <div class="info-card">
+        <div class="ic-head">
+          <div class="ic-head-icon">💼</div>
+          <h3>Professional</h3>
+        </div>
+        <div class="ic-rows">
+          <div class="ic-row"><span class="ic-label">Newspaper</span><span class="ic-val" id="iPaper"></span></div>
+          <div class="ic-row"><span class="ic-label">Designation</span><span class="ic-val" id="iDesig"></span></div>
+          <div class="ic-row"><span class="ic-label">Place of Work</span><span class="ic-val" id="iPlace"></span></div>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="info-card">
+        <div class="ic-head">
+          <div class="ic-head-icon">📍</div>
+          <h3>Location</h3>
+        </div>
+        <div class="ic-rows">
+          <div class="ic-row"><span class="ic-label">District</span><span class="ic-val" id="iDist"></span></div>
+          <div class="ic-row"><span class="ic-label">State</span><span class="ic-val" id="iState"></span></div>
+          <div class="ic-row"><span class="ic-label">Country</span><span class="ic-val" id="iCountry"></span></div>
+        </div>
+      </div>
+
+      <!-- Event Details -->
+      <div class="info-card">
+        <div class="ic-head">
+          <div class="ic-head-icon">📅</div>
+          <h3>Event Details</h3>
+        </div>
+        <div class="ic-rows">
+          <div class="ic-row"><span class="ic-label">Arrival Date</span><span class="ic-val" id="iArrival"></span></div>
+          <div class="ic-row"><span class="ic-label">Room Required</span><span class="ic-val" id="iRoom"></span></div>
+          <div class="ic-row"><span class="ic-label">Registered On</span><span class="ic-val" id="iDt"></span></div>
+        </div>
+      </div>
+
+      <!-- Registration -->
+      <div class="info-card span-all reg-card">
+        <div class="ic-head">
+          <div class="ic-head-icon">🪪</div>
+          <h3>Registration Details</h3>
+        </div>
+        <div class="reg-inner">
+          <div class="reg-item">
+            <div class="reg-item-label">Registration ID</div>
+            <div class="reg-item-val green" id="iRegId"></div>
+          </div>
+          <div class="reg-item">
+            <div class="reg-item-label">KKPS ID</div>
+            <div class="reg-item-val green" id="iKkps"></div>
+          </div>
+          <div class="reg-item">
+            <div class="reg-item-label">Status</div>
+            <div class="reg-item-val" id="iStatus"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="result-foot">ℹ️ For corrections or queries, contact KUWJ Bidar Administration</p>
+  </div>
+
+</main>
+
+<footer>© 2024 KUWJ Bidar — Karnataka Union of Working Journalists. All rights reserved.</footer>
+
+<script>
+// ══════════════════════════════════════════
+// KUWJ Bidar — Member Portal Script
+// ══════════════════════════════════════════
+
+let records = [];
+let loaded  = false;
+
+// ── INIT ──────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  // Numeric only input
+  const inp = document.getElementById('phoneInput');
+  inp.addEventListener('input', () => { inp.value = inp.value.replace(/\D/g,'') });
+  inp.addEventListener('keydown', e => { if(e.key==='Enter') searchUser() });
+
+  // CSV file upload handler
+  document.getElementById('csvFileInput').addEventListener('change', e => {
+    const file = e.target.files[0];
+    if(file) readFileCSV(file);
+  });
+
+  // Try auto-loading data.csv
+  autoLoad();
+});
+
+// ── AUTO LOAD CSV ─────────────────────────
+async function autoLoad(){
+  try{
+    const res = await fetch('data.csv');
+    if(!res.ok) throw new Error('not found');
+    const txt = await res.text();
+    processCSV(txt);
+  } catch(err){
+    // Fetch failed (file:// protocol or file missing) — show upload banner
+    document.getElementById('uploadBanner').style.display = 'flex';
+    console.warn('Auto-load failed. Upload CSV manually.');
+  }
+}
+
+// ── READ FILE (manual upload) ─────────────
+function readFileCSV(file){
+  const reader = new FileReader();
+  reader.onload = e => {
+    processCSV(e.target.result);
+    document.getElementById('uploadBanner').style.display = 'none';
+  };
+  reader.onerror = () => toast('Failed to read file.','err');
+  reader.readAsText(file);
+}
+
+// ── PROCESS CSV TEXT ──────────────────────
+function processCSV(txt){
+  records = parseCSV(txt);
+  loaded  = true;
+  document.getElementById('recordCount').textContent = records.length;
+  document.getElementById('dataStatus').style.display = 'block';
+
+  // Auto-detect which key holds phone number
+  if(records.length > 0){
+    const keys = Object.keys(records[0]);
+    phoneKey = keys.find(k => /phone|mobile|mob|contact|ph\b/i.test(k)) || 'phone';
+    console.log(`✅ ${records.length} records | phone key: "${phoneKey}"`);
+    console.log('Sample record:', records[0]);
+    // Show debug info
+    showDebug(keys, records[0]);
+  }
+}
+
+// ── PARSE CSV → JSON ──────────────────────
+function parseCSV(text){
+  // Strip BOM if present
+  text = text.replace(/^\uFEFF/, '');
+  const lines = text.trim().split(/\r?\n/);
+  if(lines.length < 2) return [];
+
+  // Headers — strip BOM, quotes, whitespace
+  const headers = splitLine(lines[0]).map(h => h.trim().replace(/^["']|["']$/g,'').replace(/^\uFEFF/,''));
+
+  const out = [];
+  for(let i = 1; i < lines.length; i++){
+    const line = lines[i].trim();
+    if(!line) continue;
+    const vals = splitLine(line);
+    const obj = {};
+    headers.forEach((h, idx) => {
+      obj[h] = (vals[idx] || '').trim().replace(/^["']|["']$/g, '');
+    });
+    out.push(obj);
+  }
+  return out;
+}
+
+function splitLine(line){
+  const res=[]; let cur=''; let inQ=false;
+  for(let c of line){
+    if(c==='"'){ inQ=!inQ }
+    else if(c===',' && !inQ){ res.push(cur); cur='' }
+    else cur+=c;
+  }
+  res.push(cur); return res;
+}
+
+// ── NORMALIZE PHONE ───────────────────────
+// Strips +91, spaces, dashes → returns last 10 digits
+function normalizePhone(raw){
+  if(!raw) return '';
+  return raw.replace(/\D/g,'').slice(-10);
+}
+
+// ── SEARCH ────────────────────────────────
+let phoneKey = 'phone'; // auto-detected after CSV load
+
+function searchUser(){
+  const raw   = document.getElementById('phoneInput').value.trim();
+  const phone = normalizePhone(raw);
+
+  if(!phone || phone.length !== 10){
+    shake(); toast('Enter a valid 10-digit phone number.','err'); return;
+  }
+  if(!loaded){
+    toast('Please upload CSV data first.','warn'); return;
+  }
+
+  setLoader(true);
+  setTimeout(()=>{
+    // Try auto-detected key first, then fallback scan all keys
+    let rec = records.find(r => normalizePhone(r[phoneKey]) === phone);
+
+    if(!rec){
+      // Fallback: search ALL fields for a matching 10-digit phone
+      rec = records.find(r =>
+        Object.values(r).some(v => normalizePhone(String(v)) === phone)
+      );
+    }
+
+    setLoader(false);
+    if(rec) showResult(rec);
+    else    showError();
+  }, 350);
+}
+
+// ── DEBUG PANEL ───────────────────────────
+function showDebug(keys, sample){
+  let panel = document.getElementById('debugPanel');
+  if(!panel){
+    panel = document.createElement('div');
+    panel.id = 'debugPanel';
+    panel.style.cssText = `
+      width:100%;background:rgba(34,197,94,0.04);border:1px solid rgba(34,197,94,0.15);
+      border-radius:12px;padding:16px 18px;font-size:12px;color:#64748b;
+      font-family:monospace;line-height:1.8;animation:fadeUp .4s ease;
+    `;
+    document.getElementById('searchScreen').insertBefore(panel, document.querySelector('.search-card'));
+  }
+  const phoneVal = sample[phoneKey] || '(not found)';
+  panel.innerHTML = `
+    <div style="color:#22c55e;font-weight:700;margin-bottom:8px;font-family:'Outfit',sans-serif;">
+      🔍 Debug Info — CSV Loaded
+    </div>
+    <div><b style="color:#94a3b8">Detected phone column:</b> <span style="color:#f59e0b">"${phoneKey}"</span></div>
+    <div><b style="color:#94a3b8">Sample phone value:</b> <span style="color:#f59e0b">"${phoneVal}"</span> → normalized: <span style="color:#22c55e">"${normalizePhone(String(phoneVal))}"</span></div>
+    <div><b style="color:#94a3b8">All columns:</b> ${keys.map(k=>`<span style="color:#cbd5e1">${k}</span>`).join(', ')}</div>
+    <div style="margin-top:6px;font-size:11px;color:#334155;font-family:'Outfit',sans-serif;">
+      ℹ️ Remove this panel after confirming search works
+    </div>
+  `;
+}
+
+// ── DISPLAY RESULT ────────────────────────
+function showResult(r){
+  // Helper: get value by trying multiple possible column name variants
+  function g(...keys){
+    for(const k of keys){
+      if(r[k] !== undefined && r[k] !== '') return r[k];
+    }
+    return '—';
+  }
+
+  const name = g('Name','name','NAME');
+  const initials = name.split(' ').filter(Boolean).map(w=>w[0]).join('').toUpperCase().slice(0,2) || '?';
+  q('rAvatar').textContent = initials;
+
+  // Hero
+  q('rName').textContent      = name;
+  q('rNewspaper').textContent = g('Newspaper','newspaper','NEWSPAPER','Publication');
+  q('rDesig').textContent     = g('Designation','designation','DESIGNATION','Role');
+  q('rRegId').textContent     = g('Reg ID','regId','RegID','reg_id','Registration ID','REG ID');
+  q('rStatusBadge').innerHTML = statusBadge(g('Status','status','STATUS'));
+  q('resultTs').textContent   = 'Searched at ' + new Date().toLocaleTimeString('en-IN');
+
+  // Personal
+  q('iName').textContent    = name;
+  q('iPhone').textContent   = g('Mobile','Phone','phone','mobile','MOBILE','Contact');
+  q('iParent').textContent  = g('Parent Name','parentName','Parent','Father','parent_name','PARENT NAME');
+  q('iEmail').textContent   = g('Email','email','EMAIL','E-mail');
+
+  // Professional
+  q('iPaper').textContent   = g('Newspaper','newspaper','Publication','NEWSPAPER');
+  q('iDesig').textContent   = g('Designation','designation','Role','DESIGNATION');
+  q('iPlace').textContent   = g('Place of Work','placeOfWork','Place','Office','place_of_work','PLACE OF WORK','Work Place');
+
+  // Location
+  q('iDist').textContent    = g('District','district','DISTRICT');
+  q('iState').textContent   = g('State','state','STATE');
+  q('iCountry').textContent = g('Country','country','COUNTRY');
+
+  // Event
+  q('iArrival').textContent = fmtDate(g('Arrival Date','arrivalDate','Arrival','arrival_date','ARRIVAL DATE'));
+  q('iRoom').textContent    = g('Room Required','roomRequired','Room','room_required','ROOM REQUIRED');
+  q('iDt').textContent      = fmtDT(g('Date/Time','dateTime','DateTime','Timestamp','date_time','DATE/TIME','Registration Date'));
+
+  // Registration
+  q('iRegId').textContent   = g('Reg ID','regId','RegID','Registration ID','REG ID');
+  q('iKkps').textContent    = g('K.K.P.S. ID','kkpsId','KKPS ID','KPS ID','KKPS','kkps_id','K.K.P.S ID');
+  q('iStatus').innerHTML    = statusBadge(g('Status','status','STATUS'));
+
+  hide('searchScreen'); show('resultSection');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── HELPERS ───────────────────────────────
+const q   = id => document.getElementById(id);
+const show= id => q(id).style.display='block';
+const hide= id => q(id).style.display='none';
+
+function statusBadge(s){
+  if(!s || s==='—') return '—';
+  const sl = s.toLowerCase();
+  if(sl==='active'||sl==='registered'||sl==='approved'||sl==='confirmed')
+    return `<span class="badge badge-green"><span class="badge-dot"></span>${s}</span>`;
+  if(sl==='pending'||sl==='waiting'||sl==='review')
+    return `<span class="badge badge-amber"><span class="badge-dot"></span>${s}</span>`;
+  return `<span class="badge" style="background:#1e293b;border:1px solid #334155;color:#94a3b8">${s}</span>`;
+}
+
+function fmtDate(d){
+  if(!d) return '—';
+  try{ return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) }
+  catch{ return d }
+}
+function fmtDT(d){
+  if(!d) return '—';
+  try{ return new Date(d).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) }
+  catch{ return d }
+}
+
+function setLoader(on){
+  q('loader').style.display   = on ? 'flex' : 'none';
+  q('searchBtn').disabled     = on;
+  q('errorCard').style.display= 'none';
+}
+function showError(){ q('errorCard').style.display='block' }
+
+function resetSearch(){
+  q('phoneInput').value='';
+  ['loader','errorCard'].forEach(id=> q(id).style.display='none');
+  hide('resultSection'); show('searchScreen');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function shake(){
+  const wrap = document.querySelector('.input-wrap');
+  wrap.classList.add('shake');
+  wrap.style.borderColor='var(--red)';
+  setTimeout(()=>{ wrap.classList.remove('shake'); wrap.style.borderColor='' }, 500);
+}
+
+function toast(msg, type='info'){
+  const old = document.getElementById('__toast');
+  if(old) old.remove();
+  const t = document.createElement('div');
+  t.id='__toast';
+  const col = type==='err'?'var(--red)':type==='warn'?'var(--amber)':'var(--green)';
+  t.style.cssText=`position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+    background:var(--card2);border:1px solid ${col}40;color:var(--text);
+    padding:11px 20px;border-radius:10px;font-size:13px;
+    box-shadow:0 8px 32px rgba(0,0,0,.5);z-index:9999;
+    animation:fadeUp .3s ease;white-space:nowrap;`;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 3000);
+}
+</script>
+</body>
+</html>
