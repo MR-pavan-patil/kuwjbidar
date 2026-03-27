@@ -4,13 +4,13 @@ const navLinks = document.querySelector('.nav-links');
 const dropdowns = document.querySelectorAll('.dropdown');
 
 // Notification Banner with Rotating Messages
-const notifications = [
-    "🎉 Early bird registration ends in 3 days! Register now to save 30%",
-    "📢 New keynote speaker announced - Dr. Anjali Sharma joins us!",
-    "🎨 Workshop registrations are now open - Limited seats available",
-    "🏛️ Heritage tour of Bidar Fort included with all passes",
-    "⭐ Special discount for students and cultural organizations"
-];
+// const notifications = [
+//     "🎉 Early bird registration ends in 3 days! Register now to save 30%",
+//     "📢 New keynote speaker announced - Dr. Anjali Sharma joins us!",
+//     "🎨 Workshop registrations are now open - Limited seats available",
+//     "🏛️ Heritage tour of Bidar Fort included with all passes",
+//     "⭐ Special discount for students and cultural organizations"
+// ];
 
 let currentNotificationIndex = 0;
 const notificationBanner = document.getElementById('notificationBanner');
