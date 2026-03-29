@@ -5,7 +5,11 @@ const dropdowns = document.querySelectorAll('.dropdown');
 
 // Notification Banner with Rotating Messages
 // const notifications = [
-//     "ಬೀದರ ನಗರದಲ್ಲಿ ಏಪ್ರಿಲ್ 11 ಹಾಗೂ 12ರಂದು ನಡೆಯಲಿರುವ 40ನೇ ರಾಜ್ಯ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನಕ್ಕಾಗಿ *ಆನ್ ಲೈನ್ ನೋಂದಣಿ ಮಾಡಿಕೊಂಡಲ್ಲಿ ಮಾತ್ರ ಕೊಠಡಿ (ರೂಮ್) ವ್ಯವಸ್ಥೆ ಆಗಲಿದೆ*. ಆದಷ್ಟು ಬೇಗ ಆನ್ ಲೈನ್ ನೋಂದಣಿ ಮಾಡಿಕೊಳ್ಳಲು ಕೋರಲಾಗಿದೆ. *ಮಾರ್ಚ್ 28 ಆನ್ ಲೈನ್ ನೋಂದಣಿಗೆ ಕೊನೆಯ ದಿನವಾಗಿದೆ.*",
+//     "🎉 Early bird registration ends in 3 days! Register now to save 30%",
+//     "📢 New keynote speaker announced - Dr. Anjali Sharma joins us!",
+//     "🎨 Workshop registrations are now open - Limited seats available",
+//     "🏛️ Heritage tour of Bidar Fort included with all passes",
+//     "⭐ Special discount for students and cultural organizations"
 // ];
 
 let currentNotificationIndex = 0;
@@ -14,7 +18,7 @@ const notificationText = document.getElementById('notificationText');
 const closeNotification = document.getElementById('closeNotification');
 
 // Check if banner was closed in this session
-if (!sessionStorage.getItem('notificationClosed')) {
+if (notificationBanner && !sessionStorage.getItem('notificationClosed')) {
     notificationBanner.classList.remove('hidden');
 
     // Rotate messages every 5 seconds
@@ -67,7 +71,6 @@ mobileMenuBtn.addEventListener('click', () => {
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', (e) => {
-        // Don't close if it's a dropdown toggle in mobile view
         if (window.innerWidth <= 968 && link.classList.contains('dropdown-toggle')) {
             e.preventDefault();
             const dropdown = link.closest('.dropdown');
@@ -75,7 +78,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         } else if (!link.classList.contains('dropdown-toggle')) {
             mobileMenuBtn.classList.remove('active');
             navLinks.classList.remove('active');
-            // Remove active class from all dropdowns
             dropdowns.forEach(d => d.classList.remove('active'));
         }
     });
@@ -90,76 +92,99 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Navbar scroll effect
+// --- CONSOLIDATED SCROLL HANDLER ---
+// Single scroll listener using requestAnimationFrame for all scroll-dependent logic
 const navbar = document.querySelector('.navbar');
-let lastScroll = 0;
+const hero = document.querySelector('.hero');
+let scrollTicking = false;
 
-window.addEventListener('scroll', () => {
+function onScroll() {
     const currentScroll = window.pageYOffset;
 
+    // 1. Navbar scroll effect
     if (currentScroll > 100) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
 
-    lastScroll = currentScroll;
-});
+    // 2. Highlight active navigation
+    const scrollPosition = currentScroll + 100;
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
 
-// Scroll animations
-const scrollElements = document.querySelectorAll('.scroll-animate');
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
 
-const elementInView = (el, percentageScroll = 100) => {
-    const elementTop = el.getBoundingClientRect().top;
-    return (
-        elementTop <=
-        ((window.innerHeight || document.documentElement.clientHeight) * (percentageScroll / 100))
-    );
-};
-
-const displayScrollElement = (element) => {
-    element.classList.add('active');
-};
-
-const handleScrollAnimation = () => {
-    scrollElements.forEach((el) => {
-        if (elementInView(el, 80)) {
-            displayScrollElement(el);
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navItems.forEach(item => {
+                item.classList.remove('active-nav');
+                if (item.getAttribute('href') === `#${sectionId}`) {
+                    item.classList.add('active-nav');
+                }
+            });
         }
     });
-};
 
-// Throttle scroll events for better performance
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-    if (scrollTimeout) {
-        window.cancelAnimationFrame(scrollTimeout);
+    // 3. Parallax effect for hero (GPU-friendly transform only)
+    if (hero && currentScroll < window.innerHeight) {
+        hero.style.transform = `translateY(${currentScroll * 0.5}px)`;
     }
 
-    scrollTimeout = window.requestAnimationFrame(() => {
-        handleScrollAnimation();
+    scrollTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+        window.requestAnimationFrame(onScroll);
+        scrollTicking = true;
+    }
+}, { passive: true });
+
+// --- INTERSECTION OBSERVER for scroll animations ---
+// Using IntersectionObserver instead of scroll-based checks (much more efficient)
+const scrollElements = document.querySelectorAll('.scroll-animate');
+
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+        }
     });
+}, observerOptions);
+
+scrollElements.forEach(el => {
+    observer.observe(el);
 });
 
-// Initial check for elements in view
-handleScrollAnimation();
+// Initial check — trigger for already visible elements
+scrollElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.8) {
+        el.classList.add('active');
+        observer.unobserve(el);
+    }
+});
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
-
-        // Skip if it's a dropdown toggle
-        if (this.classList.contains('dropdown-toggle')) {
-            return;
-        }
+        if (this.classList.contains('dropdown-toggle')) return;
 
         e.preventDefault();
         const target = document.querySelector(href);
 
         if (target) {
-            const offsetTop = target.offsetTop - 80; // Adjust for navbar height
-
+            const offsetTop = target.offsetTop - 80;
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -176,18 +201,14 @@ const addStaggerDelay = (selector, baseDelay = 100) => {
     });
 };
 
-// Apply stagger delays
 addStaggerDelay('.highlight-card', 150);
 addStaggerDelay('.guest-card', 150);
 addStaggerDelay('.bidar-card', 150);
 addStaggerDelay('.gallery-item', 100);
 
-// Desktop dropdown hover effect (only on larger screens)
+// Desktop dropdown hover effect
 if (window.innerWidth > 968) {
     dropdowns.forEach(dropdown => {
-        const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
-        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
-
         let timeout;
 
         dropdown.addEventListener('mouseenter', () => {
@@ -203,101 +224,36 @@ if (window.innerWidth > 968) {
     });
 }
 
-// Parallax effect for hero section
-const hero = document.querySelector('.hero');
-if (hero) {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallaxSpeed = 0.5;
-
-        if (scrolled < window.innerHeight) {
-            hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-        }
-    });
-}
-
-// Add loading animation
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
-
-// Enhanced scroll reveal with intersection observer
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe all scroll animate elements
-scrollElements.forEach(el => {
-    observer.observe(el);
-});
-
 // Counter animation for stats
-const animateCounter = (element, target, duration = 2000) => {
-    const start = 0;
-    const increment = target / (duration / 16);
-    let current = start;
-
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target + '+';
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current) + '+';
-        }
-    }, 16);
-};
-
-// Trigger counter animation when stats come into view
 const statNumbers = document.querySelectorAll('.stat-number');
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const target = entry.target.textContent.replace('+', '');
-            animateCounter(entry.target, parseInt(target));
-            statsObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
+if (statNumbers.length) {
+    const animateCounter = (element, target, duration = 2000) => {
+        const increment = target / (duration / 16);
+        let current = 0;
 
-statNumbers.forEach(stat => {
-    statsObserver.observe(stat);
-});
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                element.textContent = target + '+';
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current) + '+';
+            }
+        }, 16);
+    };
 
-// Add active state to current navigation item based on scroll position
-const sections = document.querySelectorAll('section[id]');
-const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target.textContent.replace('+', '');
+                animateCounter(entry.target, parseInt(target));
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
 
-const highlightNavigation = () => {
-    const scrollPosition = window.pageYOffset + 100;
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            navItems.forEach(item => {
-                item.classList.remove('active-nav');
-                if (item.getAttribute('href') === `#${sectionId}`) {
-                    item.classList.add('active-nav');
-                }
-            });
-        }
-    });
-};
-
-window.addEventListener('scroll', highlightNavigation);
+    statNumbers.forEach(stat => statsObserver.observe(stat));
+}
 
 // Gallery item hover effect
 const galleryItems = document.querySelectorAll('.gallery-item');
@@ -305,13 +261,12 @@ galleryItems.forEach(item => {
     item.addEventListener('mouseenter', function() {
         this.style.zIndex = '10';
     });
-
     item.addEventListener('mouseleave', function() {
         this.style.zIndex = '1';
     });
 });
 
-// Add ripple effect to buttons
+// Ripple effect on CTA buttons
 const addRippleEffect = (e) => {
     const button = e.currentTarget;
     const ripple = document.createElement('span');
@@ -326,13 +281,9 @@ const addRippleEffect = (e) => {
     ripple.classList.add('ripple');
 
     button.appendChild(ripple);
-
-    setTimeout(() => {
-        ripple.remove();
-    }, 600);
+    setTimeout(() => ripple.remove(), 600);
 };
 
-// Apply ripple effect to CTAs
 const ctaButtons = document.querySelectorAll('.hero-cta, .cta-button, .nav-cta');
 ctaButtons.forEach(button => {
     button.addEventListener('click', addRippleEffect);
@@ -340,37 +291,12 @@ ctaButtons.forEach(button => {
     button.style.overflow = 'hidden';
 });
 
-// Form validation (if you add a registration form later)
-const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-};
-
-// Lazy load images (if you add real images later)
-const lazyLoadImages = () => {
-    const images = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-
-    images.forEach(img => imageObserver.observe(img));
-};
-
-// Initialize lazy loading
-lazyLoadImages();
-
-// Smooth scroll to top button (optional enhancement)
+// Scroll to top button
 const createScrollTopButton = () => {
     const scrollTopBtn = document.createElement('button');
     scrollTopBtn.innerHTML = '↑';
     scrollTopBtn.className = 'scroll-top-btn';
+    scrollTopBtn.setAttribute('aria-label', 'Scroll to top');
     scrollTopBtn.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -385,13 +311,15 @@ const createScrollTopButton = () => {
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s ease;
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
         z-index: 999;
         box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
     `;
 
     document.body.appendChild(scrollTopBtn);
 
+    // Visibility handled inside the consolidated scroll handler would be ideal,
+    // but keeping it here for modularity — it uses the passive scroll listener
     window.addEventListener('scroll', () => {
         if (window.pageYOffset > 500) {
             scrollTopBtn.style.opacity = '1';
@@ -400,13 +328,10 @@ const createScrollTopButton = () => {
             scrollTopBtn.style.opacity = '0';
             scrollTopBtn.style.visibility = 'hidden';
         }
-    });
+    }, { passive: true });
 
     scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     scrollTopBtn.addEventListener('mouseenter', function() {
@@ -420,9 +345,9 @@ const createScrollTopButton = () => {
     });
 };
 
-// Initialize scroll to top button
 createScrollTopButton();
 
-// Log console message
-console.log('%c🎭 Bidar Cultural Summit 2026 ', 'background: #D4AF37; color: #0A0A0F; font-size: 20px; padding: 10px; font-weight: bold;');
-console.log('%cWelcome to the most prestigious cultural event!', 'color: #D4AF37; font-size: 14px;');
+// Add loading class on page load
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+});
