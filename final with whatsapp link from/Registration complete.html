@@ -7,7 +7,7 @@
     <title>Journalist Registration | Press Conference 2026</title>
 
     <style>
-         :root {
+        :root {
             --primary: #1a1a2e;
             --accent: #d4af37;
             --success: #2d6a4f;
@@ -17,26 +17,27 @@
             --border: #e5e5e5;
             --error: #c1121f;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #faf9f6 0%, #f0ede5 100%);
             min-height: 100vh;
             padding: 2rem 1rem;
         }
-        
+
         .container {
             max-width: 700px;
             margin: 0 auto;
         }
-        
+
         .card {
             background: white;
             border-radius: 16px;
@@ -45,25 +46,26 @@
             border-top: 4px solid var(--accent);
             animation: fadeIn 0.6s ease;
         }
-        
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .header {
             text-align: center;
             margin-bottom: 2.5rem;
             padding-bottom: 1.5rem;
             border-bottom: 2px solid var(--border);
         }
-        
+
         .badge {
             display: inline-block;
             background: var(--primary);
@@ -76,19 +78,19 @@
             border-radius: 20px;
             margin-bottom: 1rem;
         }
-        
+
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             color: var(--primary);
             margin-bottom: 0.5rem;
         }
-        
+
         .subtitle {
             color: #666;
             font-size: 1rem;
         }
-        
+
         .section-title {
             font-size: 0.875rem;
             font-weight: 600;
@@ -99,11 +101,11 @@
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--border);
         }
-        
+
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
+
         label {
             display: block;
             font-size: 0.875rem;
@@ -111,18 +113,18 @@
             margin-bottom: 0.5rem;
             color: var(--text);
         }
-        
+
         .required {
             color: var(--error);
         }
-        
+
         .optional {
             font-size: 0.75rem;
             color: #999;
             font-weight: 400;
             font-style: italic;
         }
-        
+
         input,
         select {
             width: 100%;
@@ -134,21 +136,21 @@
             outline: none;
             font-family: inherit;
         }
-        
+
         input:focus,
         select:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
         }
-        
+
         input:valid:not(:placeholder-shown) {
             border-color: var(--success);
         }
-        
+
         input:invalid:not(:placeholder-shown) {
             border-color: var(--error);
         }
-        
+
         select {
             cursor: pointer;
             appearance: none;
@@ -157,26 +159,27 @@
             background-position: right 1rem center;
             padding-right: 2.5rem;
         }
+
         /* IMPROVED RADIO BUTTONS */
-        
+
         .radio-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
             margin-top: 0.75rem;
         }
-        
+
         .radio-option {
             position: relative;
         }
-        
+
         .radio-option input[type="radio"] {
             position: absolute;
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .radio-label {
             display: flex;
             align-items: center;
@@ -192,7 +195,7 @@
             text-align: center;
             min-height: 70px;
         }
-        
+
         .radio-option input[type="radio"]:checked+.radio-label {
             background: linear-gradient(135deg, var(--primary), #2a2a4e);
             color: white;
@@ -200,25 +203,25 @@
             box-shadow: 0 4px 12px rgba(26, 26, 46, 0.3);
             transform: translateY(-2px);
         }
-        
+
         .radio-option input[type="radio"]:not(:checked)+.radio-label:hover {
             border-color: var(--accent);
             background: #fffef8;
             transform: translateY(-1px);
         }
-        
+
         .radio-icon {
             display: block;
             font-size: 1.5rem;
             margin-bottom: 0.25rem;
         }
-        
+
         .helper-text {
             font-size: 0.75rem;
             color: #999;
             margin-top: 0.25rem;
         }
-        
+
         .btn {
             width: 100%;
             padding: 1rem 2rem;
@@ -233,18 +236,18 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             margin-top: 1rem;
         }
-        
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
         }
-        
+
         .btn:disabled {
             background: #ccc;
             cursor: not-allowed;
             transform: none;
         }
-        
+
         .btn-whatsapp {
             background: linear-gradient(135deg, var(--whatsapp), #1ea952);
             margin-top: 1.5rem;
@@ -254,11 +257,11 @@
             gap: 0.5rem;
             text-decoration: none;
         }
-        
+
         .btn-whatsapp:hover {
             background: linear-gradient(135deg, #1ea952, var(--whatsapp));
         }
-        
+
         .message {
             padding: 1rem;
             border-radius: 8px;
@@ -266,63 +269,65 @@
             display: none;
             animation: slideDown 0.3s;
         }
-        
+
         @keyframes slideDown {
             from {
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .error-msg {
             background: #fff5f5;
             color: var(--error);
             border-left: 4px solid var(--error);
         }
-        
+
         .success-msg {
             background: #f0fdf4;
             color: var(--success);
             border-left: 4px solid var(--success);
         }
-        
+
         .message.show {
             display: block;
         }
-        
+
         .success-icon {
             font-size: 3rem;
             text-align: center;
             margin-bottom: 1rem;
             animation: scaleIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
-        
+
         @keyframes scaleIn {
             from {
                 transform: scale(0);
             }
+
             to {
                 transform: scale(1);
             }
         }
-        
+
         .success-content {
             display: none;
         }
-        
+
         .success-content.show {
             display: block;
             animation: fadeIn 0.5s;
         }
-        
+
         .form-content.hide {
             display: none;
         }
-        
+
         .info-box {
             background: #fff9e6;
             border: 1px solid #ffe08a;
@@ -332,12 +337,12 @@
             font-size: 0.875rem;
             color: #856404;
         }
-        
+
         .info-box strong {
             display: block;
             margin-bottom: 0.25rem;
         }
-        
+
         .whatsapp-box {
             background: #e7f9f0;
             border: 2px solid var(--whatsapp);
@@ -346,19 +351,21 @@
             margin-top: 1.5rem;
             text-align: center;
         }
-        
+
         .whatsapp-icon {
             font-size: 3rem;
             margin-bottom: 0.5rem;
         }
-        
+
         @media (max-width: 640px) {
             .card {
                 padding: 1.5rem;
             }
+
             h1 {
                 font-size: 1.5rem;
             }
+
             .radio-group {
                 grid-template-columns: 1fr;
             }
@@ -374,13 +381,28 @@
                 <h1>Journalist Registration</h1>
                 <p class="subtitle">Journalist's 40th State conference Bidar</p>
             </div>
-
-            <div class="info-box">
-                <strong>📝 Registration Information</strong> After successful registration, you'll get a WhatsApp group link to join our media community!
+            <!-- dispaly none nikal dena -->
+            <div class="info-box" style="display: none;">
+                <strong>📝 Registration Information</strong> After successful registration, you'll get a WhatsApp group
+                link to join our media community!
             </div>
 
-            <!-- Form Section -->
-            <div class="form-content">
+            <!-- Registration Closed Section -->
+            <div class="registration-closed"
+                style="text-align: center; padding: 3rem 1rem; background: #fff5f5; border: 2px dashed var(--error); border-radius: 12px; margin-bottom: 1.5rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
+                <h2 style="color: var(--error); margin-bottom: 0.5rem; font-family: 'Playfair Display', serif;">
+                    Registration Date Over</h2>
+                <p style="color: #666; font-size: 1.1rem; line-height: 1.5;">
+                    We are no longer accepting new registrations for this event.<br>
+                    Thank you for your overwhelming response!
+                </p>
+            </div>
+
+            <!-- Form Section (Hidden since registration is closed) -->
+
+            <!-- dispaly none nikal dena -->
+            <div class="form-content" style="display: none;">
                 <form id="regForm">
                     <div class="section-title">Personal Information</div>
 
@@ -486,7 +508,8 @@
 
                     <div class="form-group">
                         <label>Mobile Number<span class="required">*</span></label>
-                        <input type="tel" id="mobile" placeholder="10-digit mobile" required pattern="[0-9]{10}" maxlength="10">
+                        <input type="tel" id="mobile" placeholder="10-digit mobile" required pattern="[0-9]{10}"
+                            maxlength="10">
                     </div>
 
                     <div class="form-group">
@@ -542,7 +565,8 @@
                     Registration Successful!
                 </h2>
                 <div class="success-msg show">
-                    <strong>Thank you for registering!</strong><br><br> Your details have been recorded successfully.<br> Registration ID: <strong id="displayRegId">-</strong><br><br>
+                    <strong>Thank you for registering!</strong><br><br> Your details have been recorded
+                    successfully.<br> Registration ID: <strong id="displayRegId">-</strong><br><br>
                     <span id="roomConfirm"></span>
                 </div>
 
@@ -553,7 +577,8 @@
                     <p style="font-size: 0.875rem; color: #666; margin-bottom: 1rem;">
                         Connect with fellow journalists and get event updates
                     </p>
-                    <a href="https://chat.whatsapp.com/YOUR_GROUP_INVITE_LINK" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                    <a href="https://chat.whatsapp.com/YOUR_GROUP_INVITE_LINK" class="btn btn-whatsapp" target="_blank"
+                        rel="noopener noreferrer">
                         <span style="font-size: 1.5rem;">📱</span> Join WhatsApp Group
                     </a>
                     <p style="font-size: 0.75rem; color: #999; margin-top: 0.5rem;">
@@ -697,7 +722,7 @@
         }
 
         // Form submission
-        form.addEventListener('submit', async function(e) {
+        form.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             if (!validateForm()) return;
@@ -751,13 +776,13 @@
         });
 
         // Input restrictions
-        document.getElementById('mobile').addEventListener('input', function(e) {
+        document.getElementById('mobile').addEventListener('input', function (e) {
             this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
         });
 
         // Prevent Enter key submission in inputs
         document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('keydown', function(e) {
+            input.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter' && this.type !== 'radio') e.preventDefault();
             });
         });
