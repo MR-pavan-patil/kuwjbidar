@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventLens — Photo Gallery</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+    <!-- Masonry -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+    <!-- imagesLoaded -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js"></script>
+
+    <style>
+        /* ─── RESET & BASE ─────────────────────────────────────────────── */
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+         :root {
+            --bg: #0d0d0f;
+            --surface: #16161a;
+            --border: #242428;
+            --accent: #e8c547;
+            --accent2: #ff6b35;
+            --text: #f0ede8;
+            --muted: #7a7a85;
+            --card-bg: #1a1a1f;
+            --radius: 6px;
+            --transition: 0.32s cubic-bezier(.4, 0, .2, 1);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        /* ─── NOISE GRAIN OVERLAY ──────────────────────────────────────── */
+        
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.35;
+        }
+        /* ─── HEADER ───────────────────────────────────────────────────── */
+        
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(13, 13, 15, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 clamp(1rem, 4vw, 3rem);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.75rem;
+            letter-spacing: 0.06em;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        #photo-count {
+            font-size: 0.75rem;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .btn-refresh {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            cursor: pointer;
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .btn-refresh:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-refresh svg {
+            width: 13px;
+            height: 13px;
+        }
+        /* ─── HERO ─────────────────────────────────────────────────────── */
+        
+        .hero {
+            padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 3rem) 2rem;
+            max-width: 900px;
+        }
+        
+        .hero-eyebrow {
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+        
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        
+        .hero h1 em {
+            font-style: normal;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--accent);
+        }
+        
+        .hero p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            max-width: 500px;
+            line-height: 1.65;
+        }
+        /* ─── CONTROLS BAR ─────────────────────────────────────────────── */
+        
+        .controls {
+            padding: 1.5rem clamp(1rem, 4vw, 3rem);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            transition: all var(--transition);
+        }
+        
+        .tab:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0d0d0f;
+            font-weight: 500;
+        }
+        
+        .spacer {
+            flex: 1;
+        }
+        
+        .search-wrap {
+            position: relative;
+        }
+        
+        .search-wrap svg {
+            position: absolute;
+            left: 0.65rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            color: var(--muted);
+            pointer-events: none;
+        }
+        
+        #search-input {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem;
+            padding: 0.45rem 0.75rem 0.45rem 2rem;
+            outline: none;
+            width: 200px;
+            transition: border-color var(--transition);
+        }
+        
+        #search-input:focus {
+            border-color: var(--accent);
+        }
+        
+        #search-input::placeholder {
+            color: var(--muted);
+        }
+        /* ─── LOADING STATE ────────────────────────────────────────────── */
+        
+        #loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+            gap: 1.25rem;
+        }
+        
+        .loader-ring {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .loader-text {
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        /* ─── CONFIG NOTICE ────────────────────────────────────────────── */
+        
+        #config-notice {
+            display: none;
+            margin: 2rem clamp(1rem, 4vw, 3rem);
+            border: 1px dashed var(--accent2);
+            background: rgba(255, 107, 53, 0.07);
+            border-radius: var(--radius);
+            padding: 1.5rem 2rem;
+        }
+        
+        #config-notice h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.04em;
+            color: var(--accent2);
+            margin-bottom: 0.5rem;
+        }
+        
+        #config-notice p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+        
+        #config-notice code {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.82rem;
+            color: var(--accent);
+        }
+        
+        #config-notice .steps {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        #config-notice .step {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.82rem;
+            color: var(--text);
+            align-items: flex-start;
+        }
+        
+        #config-notice .step-num {
+            background: var(--accent2);
+            color: #0d0d0f;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        /* ─── GALLERY ──────────────────────────────────────────────────── */
+        
+        .gallery-wrap {
+            padding: 2rem clamp(1rem, 4vw, 3rem);
+        }
+        
+        .gallery-grid {
+            /* Masonry via JS */
+        }
+        
+        .gallery-grid .grid-sizer,
+        .gallery-item {
+            width: calc(33.333% - 10px);
+        }
+        
+        .gutter-sizer {
+            width: 14px;
+        }
+        
+        @media (max-width: 900px) {
+            .gallery-grid .grid-sizer,
+            .gallery-item {
+                width: calc(50% - 7px);
+            }
+        }
+        
+        @media (max-width: 560px) {
+            .gallery-grid .grid-sizer,
+            .gallery-item {
+                width: 100%;
+            }
+        }
+        
+        .gallery-item {
+            margin-bottom: 14px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.55s cubic-bezier(.4, 0, .2, 1);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.04);
+        }
+        
+        .gallery-item .item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1rem;
+        }
+        
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+        
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+            transform: translateY(8px);
+            transition: transform var(--transition);
+        }
+        
+        .gallery-item:hover .item-actions {
+            transform: translateY(0);
+        }
+        
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            cursor: pointer;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition);
+            text-decoration: none;
+        }
+        
+        .action-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0d0d0f;
+        }
+        
+        .action-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .item-tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: var(--accent);
+            color: #0d0d0f;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            align-self: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        /* ─── SKELETON LOADER ──────────────────────────────────────────── */
+        
+        .skeleton {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 14px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .skeleton::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+            animation: shimmer 1.4s infinite;
+        }
+        
+        @keyframes shimmer {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+        /* ─── EMPTY STATE ──────────────────────────────────────────────── */
+        
+        #empty-state {
+            display: none;
+            text-align: center;
+            padding: 5rem 2rem;
+            color: var(--muted);
+        }
+        
+        #empty-state svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+        
+        #empty-state h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.06em;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        
+        #empty-state p {
+            font-size: 0.85rem;
+        }
+        /* ─── LOAD MORE ────────────────────────────────────────────────── */
+        
+        #load-more-wrap {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .btn-load-more {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.7rem 2rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            transition: all var(--transition);
+        }
+        
+        .btn-load-more:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        /* ─── LIGHTBOX ─────────────────────────────────────────────────── */
+        
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        #lightbox.open {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .lb-backdrop {
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+        }
+        
+        .lb-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1;
+        }
+        
+        #lb-img {
+            max-width: 90vw;
+            max-height: 78vh;
+            border-radius: var(--radius);
+            object-fit: contain;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8);
+            animation: zoomIn 0.25s cubic-bezier(.4, 0, .2, 1);
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.94);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .lb-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .lb-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            font-size: 1rem;
+        }
+        
+        .lb-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0d0d0f;
+        }
+        
+        .lb-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        #lb-counter {
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .lb-close {
+            position: absolute;
+            top: -2.5rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: color var(--transition);
+        }
+        
+        .lb-close:hover {
+            color: var(--text);
+        }
+        
+        .lb-download {
+            position: absolute;
+            top: -2.5rem;
+            left: 0;
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color var(--transition);
+        }
+        
+        .lb-download:hover {
+            color: var(--accent);
+        }
+        
+        .lb-download svg {
+            width: 13px;
+            height: 13px;
+        }
+        /* ─── FOOTER ───────────────────────────────────────────────────── */
+        
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 1.5rem clamp(1rem, 4vw, 3rem);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            color: var(--muted);
+            font-size: 0.76rem;
+            letter-spacing: 0.04em;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        /* ─── SCROLL TO TOP ────────────────────────────────────────────── */
+        
+        #scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 200;
+            background: var(--accent);
+            color: #0d0d0f;
+            border: none;
+            cursor: pointer;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(232, 197, 71, 0.4);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+            transition: all var(--transition);
+        }
+        
+        #scroll-top.visible {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+        
+        #scroll-top svg {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════════ HEADER ═══════════════════ -->
+    <header>
+        <div class="logo">Event<span>Lens</span></div>
+        <div class="header-meta">
+            <span id="photo-count">Loading…</span>
+            <button class="btn-refresh" onclick="Gallery.reload()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="23 4 23 10 17 10"/>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+      </svg>
+      Refresh
+    </button>
+        </div>
+    </header>
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section class="hero">
+        <div class="hero-eyebrow">📸 Event Photo Archive</div>
+        <h1>Every <em>moment</em><br>captured.</h1>
+        <p>Browse the full collection — click any photo to explore, download originals straight from Google Drive.</p>
+    </section>
+
+    <!-- ═══════════════════ CONFIG NOTICE ═══════════════════ -->
+    <div id="config-notice">
+        <h3>⚙ Setup Required</h3>
+        <p>Open <code>photos.html</code> and set your <code>DRIVE_FOLDER_ID</code> and <code>API_KEY</code> at the top of the script. Follow the steps below:</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div><span>Go to <strong>Google Drive</strong> → right-click your photos folder → <em>Share</em> → set to <strong>"Anyone with the link"</strong></span></div>
+            <div class="step">
+                <div class="step-num">2</div><span>Copy the folder ID from the URL: <code>drive.google.com/drive/folders/<strong>FOLDER_ID_HERE</strong></code></span></div>
+            <div class="step">
+                <div class="step-num">3</div><span>Go to <a href="https://console.cloud.google.com" target="_blank" style="color:var(--accent)">Google Cloud Console</a> → Create Project → Enable <strong>Google Drive API</strong> → Create an <strong>API Key</strong> → Restrict it to Drive API</span></div>
+            <div class="step">
+                <div class="step-num">4</div><span>Paste both into the <code>CONFIG</code> block at the top of the JS section in this file.</span></div>
+            <div class="step">
+                <div class="step-num">5</div><span>For categories: create <strong>sub-folders</strong> inside your main folder (e.g. "Day 1", "Day 2", "Stage"). They become the filter tabs automatically.</span></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ CONTROLS ═══════════════════ -->
+    <div class="controls">
+        <div class="filter-tabs" id="filter-tabs">
+            <button class="tab active" data-cat="all">All Photos</button>
+        </div>
+        <div class="spacer"></div>
+        <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+            <input id="search-input" type="text" placeholder="Search by name…" oninput="Gallery.search(this.value)">
+        </div>
+    </div>
+
+    <!-- ═══════════════════ LOADER ═══════════════════ -->
+    <div id="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">Fetching photos from Drive…</div>
+    </div>
+
+    <!-- ═══════════════════ GALLERY ═══════════════════ -->
+    <div class="gallery-wrap" id="gallery-wrap" style="display:none">
+        <div class="gallery-grid" id="gallery-grid">
+            <div class="grid-sizer"></div>
+            <div class="gutter-sizer"></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ EMPTY STATE ═══════════════════ -->
+    <div id="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <circle cx="8.5" cy="8.5" r="1.5"/>
+    <path d="m21 15-5-5L5 21"/>
+  </svg>
+        <h3>No Photos Found</h3>
+        <p>Try a different category or clear your search.</p>
+    </div>
+
+    <!-- ═══════════════════ LOAD MORE ═══════════════════ -->
+    <div id="load-more-wrap">
+        <button class="btn-load-more" onclick="Gallery.loadMore()">Load more photos</button>
+    </div>
+
+    <!-- ═══════════════════ LIGHTBOX ═══════════════════ -->
+    <div id="lightbox">
+        <div class="lb-backdrop" onclick="LightBox.close()"></div>
+        <div class="lb-content">
+            <button class="lb-close" onclick="LightBox.close()">✕</button>
+            <a id="lb-download" class="lb-download" download target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg> Download Original
+            </a>
+            <img id="lb-img" src="" alt="Preview" />
+            <div class="lb-controls">
+                <button class="lb-btn" onclick="LightBox.prev()" title="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+                <span id="lb-counter">1 / 1</span>
+                <button class="lb-btn" onclick="LightBox.next()" title="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ SCROLL TOP ═══════════════════ -->
+    <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+    <!-- ═══════════════════ FOOTER ═══════════════════ -->
+    <footer>
+        <span>EventLens Gallery · Powered by Google Drive</span>
+        <span>Images auto-sync from your Drive folder</span>
+    </footer>
+
+    <!-- ═══════════════════ SCRIPT ═══════════════════ -->
+    <script>
+        /* ╔══════════════════════════════════════════════════════════════╗
+           ║   ⚙  CONFIGURATION — EDIT THIS BLOCK                        ║
+           ╚══════════════════════════════════════════════════════════════╝ */
+        const CONFIG = {
+            // Paste your Google Drive folder ID here
+            // Get it from: drive.google.com/drive/folders/<<FOLDER_ID>>
+            DRIVE_FOLDER_ID: '12lQ4gqwzN5OxRrMR5VF6_LCdKd6fDO64',
+
+            // Paste your Google Drive API key here
+            // Get it from: console.cloud.google.com (Enable Drive API → Create Key)
+            API_KEY: 'AIzaSyCfF-Et-pHMOq6TOnk9-j68AamCAlwsBSw',
+
+            // How many photos to show per page (increase if needed)
+            PAGE_SIZE: 48,
+
+            // Event name shown in header (optional)
+            EVENT_NAME: 'Annual Tech Summit 2025',
+
+            // Supported image MIME types
+            IMAGE_MIMES: ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/heic'],
+        };
+
+        /* ════════════════════════════════════════════════════════════════
+           INTERNALS — no need to edit below
+           ════════════════════════════════════════════════════════════════ */
+
+        const DRIVE_API = 'https://www.googleapis.com/drive/v3/files';
+
+        let allPhotos = []; // all fetched photo objects
+        let filtered = []; // currently filtered set
+        let currentPage = 0;
+        let activeCat = 'all';
+        let activeSearch = '';
+        let msnry = null;
+        let lbIndex = 0;
+
+        // ── Validate config ──────────────────────────────────────────────
+        function isConfigured() {
+            return CONFIG.DRIVE_FOLDER_ID !== 'YOUR_FOLDER_ID_HERE' &&
+                CONFIG.API_KEY !== 'YOUR_API_KEY_HERE';
+        }
+
+        // ── Fetch all image files from a folder (handles pagination) ──────
+        async function fetchFilesFromFolder(folderId, folderName) {
+            const mimeFilter = CONFIG.IMAGE_MIMES
+                .map(m => `mimeType='${m}'`).join(' or ');
+            let pageToken = null;
+            const files = [];
+
+            do {
+                const params = new URLSearchParams({
+                    q: `'${folderId}' in parents and (${mimeFilter}) and trashed=false`,
+                    key: CONFIG.API_KEY,
+                    fields: 'nextPageToken,files(id,name,mimeType,imageMediaMetadata)',
+                    pageSize: 1000,
+                    ...(pageToken ? {
+                        pageToken
+                    } : {}),
+                });
+
+                const res = await fetch(`${DRIVE_API}?${params}`);
+                const data = await res.json();
+                if (data.error) throw new Error(data.error.message);
+
+                (data.files || []).forEach(f => {
+                    files.push({...f,
+                        category: folderName
+                    });
+                });
+                pageToken = data.nextPageToken || null;
+            } while (pageToken);
+
+            return files;
+        }
+
+        // ── Fetch sub-folders (categories) ───────────────────────────────
+        async function fetchSubFolders(parentId) {
+            const params = new URLSearchParams({
+                q: `'${parentId}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`,
+                key: CONFIG.API_KEY,
+                fields: 'files(id,name)',
+                pageSize: 50,
+            });
+            const res = await fetch(`${DRIVE_API}?${params}`);
+            const data = await res.json();
+            if (data.error) throw new Error(data.error.message);
+            return data.files || [];
+        }
+
+        // ── Build thumb URL (no auth needed for public files) ────────────
+        function thumbUrl(fileId, size = 400) {
+            return `https://lh3.googleusercontent.com/d/${fileId}=w${size}`;
+        }
+
+        function fullUrl(fileId) {
+            return `https://lh3.googleusercontent.com/d/${fileId}=w2000`;
+        }
+
+        function downloadUrl(fileId) {
+            return `https://drive.google.com/uc?export=download&id=${fileId}`;
+        }
+
+        // ── Main loader ───────────────────────────────────────────────────
+        async function loadPhotos() {
+            document.getElementById('loader').style.display = 'flex';
+            document.getElementById('gallery-wrap').style.display = 'none';
+            document.getElementById('config-notice').style.display = 'none';
+            document.getElementById('empty-state').style.display = 'none';
+
+            if (!isConfigured()) {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('config-notice').style.display = 'block';
+                document.getElementById('photo-count').textContent = 'Not configured';
+                loadDemoPhotos();
+                return;
+            }
+
+            try {
+                // Fetch sub-folders (categories) + root images in parallel
+                const [subFolders, rootFiles] = await Promise.all([
+                    fetchSubFolders(CONFIG.DRIVE_FOLDER_ID),
+                    fetchFilesFromFolder(CONFIG.DRIVE_FOLDER_ID, 'All'),
+                ]);
+
+                let photos = [...rootFiles];
+                const categories = ['All'];
+
+                for (const folder of subFolders) {
+                    const files = await fetchFilesFromFolder(folder.id, folder.name);
+                    photos = photos.concat(files);
+                    if (files.length) categories.push(folder.name);
+                }
+
+                // De-duplicate (root images already in subfolder sets)
+                if (subFolders.length) {
+                    const subIds = new Set(photos.filter(p => p.category !== 'All').map(p => p.id));
+                    photos = photos.filter(p => !(p.category === 'All' && subIds.has(p.id)));
+                    photos.forEach(p => {
+                        if (p.category === 'All') p.category = 'Uncategorized';
+                    });
+                }
+
+                allPhotos = photos;
+                buildCategoryTabs(['all', ...subFolders.map(f => f.name)]);
+                renderGallery();
+
+            } catch (err) {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('photo-count').textContent = 'Error';
+                alert('Error fetching from Google Drive:\n' + err.message + '\n\nCheck your API key and folder permissions.');
+                console.error(err);
+                loadDemoPhotos();
+            }
+        }
+
+        // ── Demo/placeholder mode (when not configured) ───────────────────
+        function loadDemoPhotos() {
+            const demoCategories = ['Day 1', 'Day 2', 'Stage', 'Behind the Scenes'];
+            const demos = Array.from({
+                length: 24
+            }, (_, i) => ({
+                id: `demo_${i}`,
+                name: `Photo ${i + 1}.jpg`,
+                category: demoCategories[i % demoCategories.length],
+                _demo: true,
+                _w: 400,
+                _h: [300, 400, 280, 350, 260, 420][i % 6],
+            }));
+            allPhotos = demos;
+            buildCategoryTabs(['all', ...demoCategories]);
+            renderGallery();
+        }
+
+        // ── Category tabs ─────────────────────────────────────────────────
+        function buildCategoryTabs(cats) {
+            const wrap = document.getElementById('filter-tabs');
+            wrap.innerHTML = '';
+            cats.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'tab' + (cat === 'all' ? ' active' : '');
+                btn.dataset.cat = cat;
+                btn.textContent = cat === 'all' ? 'All Photos' : cat;
+                btn.onclick = () => Gallery.filter(cat);
+                wrap.appendChild(btn);
+            });
+        }
+
+        // ── Apply filters ─────────────────────────────────────────────────
+        function applyFilters() {
+            filtered = allPhotos.filter(p => {
+                const catOk = activeCat === 'all' || p.category ? .toLowerCase() === activeCat.toLowerCase();
+                const srchOk = !activeSearch || p.name.toLowerCase().includes(activeSearch.toLowerCase());
+                return catOk && srchOk;
+            });
+        }
+
+        // ── Render gallery ────────────────────────────────────────────────
+        function renderGallery() {
+            currentPage = 0;
+            applyFilters();
+
+            const grid = document.getElementById('gallery-grid');
+            // Clear old items (keep sizers)
+            Array.from(grid.querySelectorAll('.gallery-item, .skeleton')).forEach(el => el.remove());
+            if (msnry) {
+                msnry.destroy();
+                msnry = null;
+            }
+
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('empty-state').style.display = 'none';
+            document.getElementById('load-more-wrap').style.display = 'none';
+
+            if (!filtered.length) {
+                document.getElementById('gallery-wrap').style.display = 'none';
+                document.getElementById('empty-state').style.display = 'block';
+                document.getElementById('photo-count').textContent = '0 photos';
+                return;
+            }
+
+            document.getElementById('gallery-wrap').style.display = 'block';
+            document.getElementById('photo-count').textContent =
+                `${filtered.length.toLocaleString()} photo${filtered.length !== 1 ? 's' : ''}`;
+
+            const page = filtered.slice(0, CONFIG.PAGE_SIZE);
+            currentPage = 1;
+            renderItems(page, true);
+        }
+
+        // ── Render a batch of items ───────────────────────────────────────
+        function renderItems(photos, init = false) {
+            const grid = document.getElementById('gallery-grid');
+            const items = photos.map((photo, idx) => buildItem(photo, idx));
+
+            if (init) {
+                items.forEach(el => grid.appendChild(el));
+
+                // Init Masonry after images load
+                imagesLoaded(grid, () => {
+                    msnry = new Masonry(grid, {
+                        itemSelector: '.gallery-item',
+                        columnWidth: '.grid-sizer',
+                        gutter: '.gutter-sizer',
+                        percentPosition: true,
+                        transitionDuration: '0.2s',
+                    });
+                    revealItems();
+                });
+            } else {
+                items.forEach(el => grid.appendChild(el));
+                imagesLoaded(grid, () => {
+                    msnry.appended(items);
+                    revealItems();
+                });
+            }
+
+            // Show load more
+            const shown = currentPage * CONFIG.PAGE_SIZE;
+            document.getElementById('load-more-wrap').style.display =
+                shown < filtered.length ? 'block' : 'none';
+        }
+
+        // ── Build single gallery item ─────────────────────────────────────
+        function buildItem(photo, idx) {
+            const el = document.createElement('div');
+            el.className = 'gallery-item';
+            el.dataset.id = photo.id;
+
+            const catLabel = photo.category && photo.category !== 'All' ?
+                `<div class="item-tag">${photo.category}</div>` : '';
+
+            if (photo._demo) {
+                // Demo placeholder
+                const colors = ['#1e1e24', '#1a1a22', '#18181e'];
+                el.innerHTML = `
+      <div style="background:${colors[idx%3]};height:${photo._h}px;display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" width="48"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+      </div>
+      <div class="item-overlay">
+        ${catLabel}
+        <div class="item-actions">
+          <span class="action-btn" title="Demo mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </span>
+        </div>
+      </div>`;
+                el.onclick = () => {};
+                return el;
+            }
+
+            const src = thumbUrl(photo.id, 600);
+            el.innerHTML = `
+    <img src="${src}" alt="${photo.name}" loading="lazy"
+         onerror="this.src='https://via.placeholder.com/400x300/16161a/242428?text=No+Preview'">
+    <div class="item-overlay">
+      ${catLabel}
+      <div class="item-actions">
+        <button class="action-btn" title="View" onclick="event.stopPropagation()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+        <a class="action-btn" href="${downloadUrl(photo.id)}" target="_blank"
+           title="Download" onclick="event.stopPropagation()" download="${photo.name}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+      </div>
+    </div>`;
+
+            el.onclick = () => LightBox.open(photo.id);
+            return el;
+        }
+
+        // ── Intersection Observer — reveal on scroll ──────────────────────
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, {
+            threshold: 0.05
+        });
+
+        function revealItems() {
+            document.querySelectorAll('.gallery-item:not(.visible)').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // ── Gallery public API ────────────────────────────────────────────
+        const Gallery = {
+            filter(cat) {
+                activeCat = cat;
+                document.querySelectorAll('.tab').forEach(t => {
+                    t.classList.toggle('active', t.dataset.cat === cat);
+                });
+                renderGallery();
+            },
+            search(q) {
+                activeSearch = q.trim();
+                renderGallery();
+            },
+            loadMore() {
+                const start = currentPage * CONFIG.PAGE_SIZE;
+                const page = filtered.slice(start, start + CONFIG.PAGE_SIZE);
+                currentPage++;
+                renderItems(page);
+            },
+            reload() {
+                loadPhotos();
+            },
+        };
+
+        // ── Lightbox ──────────────────────────────────────────────────────
+        const LightBox = {
+            open(fileId) {
+                lbIndex = filtered.findIndex(p => p.id === fileId);
+                this.show();
+                document.getElementById('lightbox').classList.add('open');
+                document.body.style.overflow = 'hidden';
+            },
+            close() {
+                document.getElementById('lightbox').classList.remove('open');
+                document.body.style.overflow = '';
+                document.getElementById('lb-img').src = '';
+            },
+            show() {
+                const photo = filtered[lbIndex];
+                if (!photo || photo._demo) return;
+                document.getElementById('lb-img').src = fullUrl(photo.id);
+                document.getElementById('lb-download').href = downloadUrl(photo.id);
+                document.getElementById('lb-download').setAttribute('download', photo.name);
+                document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${filtered.length}`;
+            },
+            prev() {
+                lbIndex = (lbIndex - 1 + filtered.length) % filtered.length;
+                this.show();
+            },
+            next() {
+                lbIndex = (lbIndex + 1) % filtered.length;
+                this.show();
+            },
+        };
+
+        // ── Keyboard nav ──────────────────────────────────────────────────
+        document.addEventListener('keydown', e => {
+            if (!document.getElementById('lightbox').classList.contains('open')) return;
+            if (e.key === 'Escape') LightBox.close();
+            if (e.key === 'ArrowLeft') LightBox.prev();
+            if (e.key === 'ArrowRight') LightBox.next();
+        });
+
+        // ── Scroll-to-top button ──────────────────────────────────────────
+        window.addEventListener('scroll', () => {
+            document.getElementById('scroll-top')
+                .classList.toggle('visible', window.scrollY > 600);
+        });
+
+        // ── Boot ──────────────────────────────────────────────────────────
+        loadPhotos();
+    </script>
+</body>
+
+</html>
