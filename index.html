@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ, ಬೀದರ ಜಿಲ್ಲಾ ಘಟಕ - 40ನೇ ರಾಜ್ಯ ಮಟ್ಟದ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನ. 11 ಹಾಗೂ 12 ಏಪ್ರಿಲ್ 2026, ಬೀದರ.">
+    <meta name="description"
+        content="ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ, ಬೀದರ ಜಿಲ್ಲಾ ಘಟಕ - 40ನೇ ರಾಜ್ಯ ಮಟ್ಟದ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನ. 11 ಹಾಗೂ 12 ಏಪ್ರಿಲ್ 2026, ಬೀದರ.">
     <link rel="shortcut icon" href="assets/images/about images/without bg logo.png">
     <title>ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ, ಬೀದರ ಜಿಲ್ಲಾ ಘಟಕ</title>
 
@@ -16,13 +17,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Non-render-blocking Google Fonts -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+            rel="stylesheet">
+    </noscript>
 
     <!-- Non-render-blocking Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </noscript>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="assets/css/trans.css">
@@ -45,19 +56,19 @@
             opacity: 1;
             transition: opacity 0.5s ease-out;
         }
-        
+
         .loader.fade-out {
             opacity: 0;
             pointer-events: none;
         }
-        
+
         .logo-container {
             position: relative;
             width: 200px;
             height: 200px;
             margin-bottom: 30px;
         }
-        
+
         .logo {
             width: 100%;
             height: 100%;
@@ -66,7 +77,7 @@
             transform: scale(0.5);
             animation: logoReveal 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
-        
+
         .loading-text {
             color: white;
             font-family: 'Arial', sans-serif;
@@ -76,7 +87,7 @@
             transform: translateY(20px);
             animation: textReveal 1s ease-out 0.8s forwards;
         }
-        
+
         .loading-bar {
             width: 0;
             height: 3px;
@@ -84,44 +95,48 @@
             margin-top: 20px;
             animation: loadingBar 2s ease-in-out forwards;
         }
-        
+
         @keyframes logoReveal {
             0% {
                 opacity: 0;
                 transform: scale(0.5) rotate(-30deg);
             }
+
             100% {
                 opacity: 1;
                 transform: scale(1) rotate(0deg);
             }
         }
-        
+
         @keyframes textReveal {
             0% {
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes loadingBar {
             0% {
                 width: 0;
             }
+
             100% {
                 width: 200px;
             }
         }
+
         /* Main Content (hidden during loading) */
-        
+
         .content {
             opacity: 0;
             transition: opacity 0.5s ease-in;
         }
-        
+
         .content.show {
             opacity: 1;
         }
@@ -136,7 +151,8 @@
 
     <div class="loader" id="loader">
         <div class="logo-container">
-            <img src="assets/images/about images/without bg logo.png" alt="Bidari Utsav Logo" class="logo" width="200" height="200">
+            <img src="assets/images/about images/without bg logo.png" alt="Bidari Utsav Logo" class="logo" width="200"
+                height="200">
         </div>
         <p class="loading-text"> ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ </p>
         <div class="loading-bar"></div>
@@ -146,8 +162,10 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo-2"><img src="assets/images/about images/without bg logo.png" alt="KUWJ Logo" width="50" height="50" style="width: 50px;"></div>
+            <div class="logo-2"><img src="assets/images/about images/without bg logo.png" alt="KUWJ Logo" width="50"
+                    height="50" style="width: 50px;"></div>
             <ul class="nav-links">
+
                 <li><a href="#home">Home</a></li>
                 <li class="dropdown">
                     <a href="about.html" class="dropdown-toggle">About <span class="arrow">▼</span></a>
@@ -170,6 +188,7 @@
                         <!-- <li><a href="#highlights">Exhibitions</a></li> -->
                     </ul>
                 </li>
+                <li><a href="sammelana.html">ಸಮ್ಮೇಳನ</a></li>
 
                 <li><a href="Explore.html">Historic Places</a></li>
                 <!-- <li><a href="contact.html">Contact Us</a></li> -->
@@ -195,7 +214,8 @@
                 </li> -->
 
                 <!-- <li><a href="#contact">Contact</a></li> -->
-                <li><a href="final with whatsapp link from/Registration complete.html" class="nav-cta">ನೋಂದಣಿ ಮಾಡಿ </a></li>
+                <li><a href="final with whatsapp link from/Registration complete.html" class="nav-cta">ನೋಂದಣಿ ಮಾಡಿ </a>
+                </li>
                 <!-- un comment this for google translate widget -->
 
                 <div id="google_translate_element"></div>
@@ -213,8 +233,11 @@
         <div class="notification-container">
             <div class="notification-icon"></div>
             <div class="notification-content">
-                <span class="notification-text" id="notificationText">ಬೀದರ ನಗರದಲ್ಲಿ ಏಪ್ರಿಲ್ 11 ಹಾಗೂ 12ರಂದು ನಡೆಯಲಿರುವ 40ನೇ ರಾಜ್ಯ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನಕ್ಕಾಗಿ *ಆನ್ ಲೈನ್ ನೋಂದಣಿ ಮಾಡಿಕೊಂಡಲ್ಲಿ ಮಾತ್ರ ಕೊಠಡಿ (ರೂಮ್) ವ್ಯವಸ್ಥೆ ಆಗಲಿದೆ*. ಆದಷ್ಟು ಬೇಗ ಆನ್ ಲೈನ್ ನೋಂದಣಿ ಮಾಡಿಕೊಳ್ಳಲು ಕೋರಲಾಗಿದೆ. *ಮಾರ್ಚ್ 28 ಆನ್ ಲೈನ್ ನೋಂದಣಿಗೆ ಕೊನೆಯ ದಿನವಾಗಿದೆ
-</span>
+                <span class="notification-text" id="notificationText">ಬೀದರ ನಗರದಲ್ಲಿ ಏಪ್ರಿಲ್ 11 ಹಾಗೂ 12ರಂದು ನಡೆಯಲಿರುವ
+                    40ನೇ ರಾಜ್ಯ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನಕ್ಕಾಗಿ *ಆನ್ ಲೈನ್ ನೋಂದಣಿ ಮಾಡಿಕೊಂಡಲ್ಲಿ ಮಾತ್ರ ಕೊಠಡಿ (ರೂಮ್) ವ್ಯವಸ್ಥೆ
+                    ಆಗಲಿದೆ*. ಆದಷ್ಟು ಬೇಗ ಆನ್ ಲೈನ್ ನೋಂದಣಿ ಮಾಡಿಕೊಳ್ಳಲು ಕೋರಲಾಗಿದೆ. *ಮಾರ್ಚ್ 28 ಆನ್ ಲೈನ್ ನೋಂದಣಿಗೆ ಕೊನೆಯ
+                    ದಿನವಾಗಿದೆ
+                </span>
             </div>
             <button class="notification-close" id="closeNotification">&times;</button>
         </div>
@@ -227,7 +250,8 @@
             <!-- <p class="hero-subtitle">Experience Excellence</p> -->
             <h1 class="hero-title">ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ, ಬೀದರ ಜಿಲ್ಲಾ ಘಟಕ</h1>
             <p class="hero-description">
-                <a href="Invitation .html" style="text-decoration: none; color: antiquewhite; color: inherit;">40ನೇ ರಾಜ್ಯ ಮಟ್ಟದ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನ</a>
+                <a href="Invitation .html" style="text-decoration: none; color: antiquewhite; color: inherit;">40ನೇ
+                    ರಾಜ್ಯ ಮಟ್ಟದ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನ</a>
             </p>
             <a href="final with whatsapp link from/Registration complete.html" class="cta-button ">ಈಗಲೇ ನೋಂದಣಿ ಮಾಡಿ</a>
 
@@ -258,12 +282,16 @@
             <h2 style="font-size: 50px; text-align: center; color: #c7a332;"> About Us </h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="assets/images/about images/logo.png" alt="KUWJ Logo" loading="lazy" decoding="async" width="540" height="500" style="width: 90%; height: 100%; object-fit: cover; border-radius: 20px;">
+                    <img src="assets/images/about images/logo.png" alt="KUWJ Logo" loading="lazy" decoding="async"
+                        width="540" height="500"
+                        style="width: 90%; height: 100%; object-fit: cover; border-radius: 20px;">
                 </div>
                 <div class="about-text">
                     <h3>ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ(ರಿ)</h3>
                     <p>
-                        ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ(KUWJ) ಸಮಸ್ತ ಪತ್ರಕರ್ತರ ಸಾಂಘಿಕ ಶಕ್ತಿಯ ವೇದಿಕೆ ಆಗಿದೆ. ಪತ್ರಕರ್ತರ ವೃತ್ತಿ ಹಿತಾಸಕ್ತಿಗಳನ್ನು ಕಾಪಾಡುವ ಸದುದ್ದೇಶದಿಂದ ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗದ ಖ್ಯಾತಿಯ ಸಾಹಿತಿ ಹಾಗೂ ಪತ್ರಕರ್ತರಾದ ಶ್ರೀ ಡಿ.ವಿ ಗುಂಡಪ್ಪ(ಡಿ.ವಿ.ಜಿ.) ಅವರು 1932 ರಲ್ಲಿ ಸಂಸ್ಥಾಪಿಸಿದ ಮೈಸೂರು ಪತ್ರಕರ್ತರ
+                        ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ(KUWJ) ಸಮಸ್ತ ಪತ್ರಕರ್ತರ ಸಾಂಘಿಕ ಶಕ್ತಿಯ ವೇದಿಕೆ ಆಗಿದೆ. ಪತ್ರಕರ್ತರ
+                        ವೃತ್ತಿ ಹಿತಾಸಕ್ತಿಗಳನ್ನು ಕಾಪಾಡುವ ಸದುದ್ದೇಶದಿಂದ ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗದ ಖ್ಯಾತಿಯ ಸಾಹಿತಿ ಹಾಗೂ ಪತ್ರಕರ್ತರಾದ
+                        ಶ್ರೀ ಡಿ.ವಿ ಗುಂಡಪ್ಪ(ಡಿ.ವಿ.ಜಿ.) ಅವರು 1932 ರಲ್ಲಿ ಸಂಸ್ಥಾಪಿಸಿದ ಮೈಸೂರು ಪತ್ರಕರ್ತರ
                         ಕರ್ನಾಟಕ ಕಾರ್ಯನಿರತ ಪತ್ರಕರ್ತರ ಸಂಘ ಎಂದು ಪರಿವರ್ತನೆಗೊಂಡು ತೊಂಬತ್ತೊಂದು ವಸಂತಗಳನ್ನು ಪೂರೈಸಿದೆ </p>
                     <!-- <p>
                         From keynote sessions with renowned speakers to interactive workshops, art installations, and cultural performances, this summit promises to be a transformative journey through time and tradition.
@@ -285,14 +313,19 @@
                 <div class="about-text ">
 
                     <p>
-                        ಕಳೆದ 95 ರಿಂದ ವೃತ್ತಿನಿರತ ಪತ್ರಕರ್ತರ ಪರವಾಗಿ ಹೋರಾಟ ಮಾಡುತ್ತಾ ನ್ಯಾಯಯುತ ಬೇಡಿಕೆಗಳನ್ನು ಉಳಿಸಿಕೊಳ್ಳುವ ನ್ಯಾಯಯುತ ಬೇಡಿಕೆಗಳ ಈಡೇರಿಕೆಗಾಗಿ ಶ್ರಮಿಸುತ್ತಿದೆ. ಪ್ರತಿ ವರ್ಷ ಸುದ್ದಿಮನೆಯಲ್ಲಿರುವ ಹಿರಿಯ ಮತ್ತು ಕಿರಿಯ ಪ್ರತಿಭೆಗಳನ್ನು ಗುರುತಿಸಿ ರಾಜ್ಯ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನದಲ್ಲಿ ಸನ್ಮಾನಿಸುವ, ವೃತ್ತಿಪರ
-                        ನೈಪುಣ್ಯತೆ ಹೆಚ್ಚಿಸುವ ಆಧುನಿಕ ಚರ್ಚೆ, ವಿಚಾರ ಸಂಕಿರಣ ಮತ್ತು ಅಧ್ಯಯನ ಶಿಬಿರಗಳನ್ನು ನಿರಂತರವಾಗಿ ಸಂಘಟಿಸುತ್ತಿದೆ.. </p>
+                        ಕಳೆದ 95 ರಿಂದ ವೃತ್ತಿನಿರತ ಪತ್ರಕರ್ತರ ಪರವಾಗಿ ಹೋರಾಟ ಮಾಡುತ್ತಾ ನ್ಯಾಯಯುತ ಬೇಡಿಕೆಗಳನ್ನು ಉಳಿಸಿಕೊಳ್ಳುವ
+                        ನ್ಯಾಯಯುತ ಬೇಡಿಕೆಗಳ ಈಡೇರಿಕೆಗಾಗಿ ಶ್ರಮಿಸುತ್ತಿದೆ. ಪ್ರತಿ ವರ್ಷ ಸುದ್ದಿಮನೆಯಲ್ಲಿರುವ ಹಿರಿಯ ಮತ್ತು ಕಿರಿಯ
+                        ಪ್ರತಿಭೆಗಳನ್ನು ಗುರುತಿಸಿ ರಾಜ್ಯ ಪತ್ರಕರ್ತರ ಸಮ್ಮೇಳನದಲ್ಲಿ ಸನ್ಮಾನಿಸುವ, ವೃತ್ತಿಪರ
+                        ನೈಪುಣ್ಯತೆ ಹೆಚ್ಚಿಸುವ ಆಧುನಿಕ ಚರ್ಚೆ, ವಿಚಾರ ಸಂಕಿರಣ ಮತ್ತು ಅಧ್ಯಯನ ಶಿಬಿರಗಳನ್ನು ನಿರಂತರವಾಗಿ
+                        ಸಂಘಟಿಸುತ್ತಿದೆ.. </p>
                     <!-- <p>
                         From keynote sessions with renowned speakers to interactive workshops, art installations, and cultural performances, this summit promises to be a transformative journey through time and tradition.
                     </p> -->
                 </div>
                 <div class="about-image ">
-                    <img src="assets/images/about images/DVG-KUWJ.jpeg" alt="DVG KUWJ" loading="lazy" decoding="async" width="540" height="500" style="width: 90%; height: 100%; object-fit: cover; border-radius: 20px;">
+                    <img src="assets/images/about images/DVG-KUWJ.jpeg" alt="DVG KUWJ" loading="lazy" decoding="async"
+                        width="540" height="500"
+                        style="width: 90%; height: 100%; object-fit: cover; border-radius: 20px;">
                 </div>
 
             </div>
@@ -317,7 +350,8 @@
         <div class="guests-grid ">
             <div class="guest-card scroll-animate ">
                 <div class="guest-image ">
-                    <img src="assets/images/partika.png" alt="ಪತ್ರಿಕಾ ಭವನ" loading="lazy" decoding="async" width="600" height="350" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/partika.png" alt="ಪತ್ರಿಕಾ ಭವನ" loading="lazy" decoding="async" width="600"
+                        height="350" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
 
             </div>
@@ -329,7 +363,8 @@
             </div> -->
             <div class="guest-card scroll-animate ">
                 <div class="guest-image ">
-                    <img src="assets/images/partika3.png" alt="ಪತ್ರಿಕಾ ಭವನ 3" loading="lazy" decoding="async" width="600" height="350" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/partika3.png" alt="ಪತ್ರಿಕಾ ಭವನ 3" loading="lazy" decoding="async"
+                        width="600" height="350" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
 
             </div>
@@ -369,7 +404,8 @@
             </div> -->
             <div class="guest-card scroll-animate ">
                 <div class="guest-image ">
-                    <img src="assets/images/about images/cm.png" alt="ಶ್ರೀ ಸಿದ್ರಾಮಯ್ಯನವರು" loading="lazy" decoding="async" width="280" height="350" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/about images/cm.png" alt="ಶ್ರೀ ಸಿದ್ರಾಮಯ್ಯನವರು" loading="lazy"
+                        decoding="async" width="280" height="350" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="guest-info ">
                     <h3 class="guest-name ">ಶ್ರೀ ಸಿದ್ರಾಮಯ್ಯನವರು </h3>
@@ -382,7 +418,8 @@
             </div>
             <div class="guest-card scroll-animate ">
                 <div class="guest-image ">
-                    <img src="assets/images/about images/DK.png" alt="ಶ್ರೀ ಡಿಕೆ ಶಿವಕುಮಾರರವರು " loading="lazy" decoding="async" width="280" height="350" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/about images/DK.png" alt="ಶ್ರೀ ಡಿಕೆ ಶಿವಕುಮಾರರವರು " loading="lazy"
+                        decoding="async" width="280" height="350" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="guest-info ">
                     <h3 class="guest-name ">ಶ್ರೀ ಡಿಕೆ ಶಿವಕುಮಾರರವರು </h3>
@@ -394,7 +431,8 @@
             </div>
             <div class="guest-card scroll-animate ">
                 <div class="guest-image ">
-                    <img src="assets/images/about images/UT.png" alt="ಶ್ರೀ ಯು ಟಿ ಖಾದರರವರು" loading="lazy" decoding="async" width="280" height="350" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/about images/UT.png" alt="ಶ್ರೀ ಯು ಟಿ ಖಾದರರವರು" loading="lazy"
+                        decoding="async" width="280" height="350" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="guest-info ">
                     <h3 class="guest-name ">ಶ್ರೀ ಯು ಟಿ ಖಾದರರವರು </h3>
@@ -425,33 +463,44 @@
         <div class="bidar-grid ">
             <div class="bidar-card scroll-animate ">
                 <div class="bidar-image ">
-                    <img src="assets/images/Historic places/Bidar Fort.jpg" alt="ಬೀದರ್ ಕೋಟೆ" loading="lazy" decoding="async" width="400" height="250" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/Historic places/Bidar Fort.jpg" alt="ಬೀದರ್ ಕೋಟೆ" loading="lazy"
+                        decoding="async" width="400" height="250" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="bidar-content ">
                     <h3>ಬೀದರ್ ಕೋಟೆ</h3>
-                    <p>ಬೀದರ್ ಕೋಟೆ ಕನ್ನಡ ರಾಜ್ಯದ ಉತ್ತರ ಪ್ರದೆಶದಲ್ಲಿ ಇರುವ ಪ್ರಸಿದ್ಧ ಐತಿಹಾಸಿಕ ಕೋಟೆ, 15ನೇ ಶತಮಾನದಲ್ಲಿ ಬಹುಮನಿ ಸುಲ್ತಾನರು ನಿರ್ಮಿಸಿದ್ದು, 30ಕ್ಕೂ ಹೆಚ್ಚು ಸ್ಮಾರಕಗಳು ಮತ್ತು ಅನನ್ಯ ಪರ್ಷಿಯನ್ ಶೈಲಿಯ ವಾಸ್ತುಶಿಲ್ಪವನ್ನು ಹೊಂದಿದೆ.</p>
+                    <p>ಬೀದರ್ ಕೋಟೆ ಕನ್ನಡ ರಾಜ್ಯದ ಉತ್ತರ ಪ್ರದೆಶದಲ್ಲಿ ಇರುವ ಪ್ರಸಿದ್ಧ ಐತಿಹಾಸಿಕ ಕೋಟೆ, 15ನೇ ಶತಮಾನದಲ್ಲಿ ಬಹುಮನಿ
+                        ಸುಲ್ತಾನರು ನಿರ್ಮಿಸಿದ್ದು, 30ಕ್ಕೂ ಹೆಚ್ಚು ಸ್ಮಾರಕಗಳು ಮತ್ತು ಅನನ್ಯ ಪರ್ಷಿಯನ್ ಶೈಲಿಯ ವಾಸ್ತುಶಿಲ್ಪವನ್ನು
+                        ಹೊಂದಿದೆ.</p>
                     <!-- <a href="# " class="bidar-link ">Learn More →</a> -->
                 </div>
             </div>
             <div class="bidar-card scroll-animate ">
                 <div class="bidar-image ">
-                    <img src="assets/images/Historic places/bahamani 2.jpg" alt="ಬಹ್ಮನಿ ಸಮಾಧಿಗಳು" loading="lazy" decoding="async" width="400" height="250" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/Historic places/bahamani 2.jpg" alt="ಬಹ್ಮನಿ ಸಮಾಧಿಗಳು" loading="lazy"
+                        decoding="async" width="400" height="250" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="bidar-content ">
                     <h3>ಬಹ್ಮನಿ ಸಮಾಧಿಗಳು</h3>
-                    <p>ಬಹ್ಮನಿ ಸಮಾಧಿಗಳು ಬೀದರಿನಲ್ಲಿ ಇರುವ ಐತಿಹಾಸಿಕ ಸ್ಮಾರಕಗಳು. ಇವು ಬಹ್ಮನಿ ಸುಲ್ತಾನರ ಸಮಾಧಿಗಳಾಗಿದ್ದು, ಸುಂದರ ಇಸ್ಲಾಮಿಕ್ ವಾಸ್ತುಶಿಲ್ಪದ ಉದಾಹರಣೆಗಳಾಗಿವೆ. ದೊಡ್ಡ ಗುಂಬಜ್‌, ಕಲ್ಲಿನ ಕೆತ್ತನೆ ಮತ್ತು ಹಳೆಯ ವಿನ್ಯಾಸವು ಈ ಸ್ಥಳವನ್ನು ವಿಶೇಷವಾಗಿಸುತ್ತದೆ. ಇದು ಬೀದರಿನ ಪ್ರಮುಖ
+                    <p>ಬಹ್ಮನಿ ಸಮಾಧಿಗಳು ಬೀದರಿನಲ್ಲಿ ಇರುವ ಐತಿಹಾಸಿಕ ಸ್ಮಾರಕಗಳು. ಇವು ಬಹ್ಮನಿ ಸುಲ್ತಾನರ ಸಮಾಧಿಗಳಾಗಿದ್ದು, ಸುಂದರ
+                        ಇಸ್ಲಾಮಿಕ್ ವಾಸ್ತುಶಿಲ್ಪದ ಉದಾಹರಣೆಗಳಾಗಿವೆ. ದೊಡ್ಡ ಗುಂಬಜ್‌, ಕಲ್ಲಿನ ಕೆತ್ತನೆ ಮತ್ತು ಹಳೆಯ ವಿನ್ಯಾಸವು ಈ
+                        ಸ್ಥಳವನ್ನು ವಿಶೇಷವಾಗಿಸುತ್ತದೆ. ಇದು ಬೀದರಿನ ಪ್ರಮುಖ
                         ಪ್ರವಾಸಿ ತಾಣವಾಗಿದೆ.</p>
                     <!-- <a href="# " class="bidar-link ">Learn More →</a> -->
                 </div>
             </div>
             <div class="bidar-card scroll-animate ">
                 <div class="bidar-image ">
-                    <img src="assets/images/Historic places/Guru Nanak.jpg" alt="ಗುರುದ್ವಾರ ಶ್ರೀ ನಾನಕ್ ಝೀರಾ ಸಾಹಿಬ್" loading="lazy" decoding="async" width="400" height="250" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="assets/images/Historic places/Guru Nanak.jpg" alt="ಗುರುದ್ವಾರ ಶ್ರೀ ನಾನಕ್ ಝೀರಾ ಸಾಹಿಬ್"
+                        loading="lazy" decoding="async" width="400" height="250"
+                        style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="bidar-content ">
                     <h3>ಗುರುದ್ವಾರ ಶ್ರೀ ನಾನಕ್ ಝೀರಾ ಸಾಹಿಬ್, ಬೀದರ್</h3>
-                    <p>ಗುರುದ್ವಾರ ಶ್ರೀ ನಾನಕ್ ಝೀರಾ ಸಾಹಿಬ್, ಬೀದರ್ ‌ನ ಪ್ರಸಿದ್ಧ ಗುರುದ್ವಾರವಾಗಿದೆ. ಸಿಖ್ ಧರ್ಮದ ಸ್ಥಾಪಕ ಗುರು ನಾನಕ್ ಇಲ್ಲಿ ಭೇಟಿ ನೀಡಿದ್ದಾಗ ನೀರಿನ ಕೊರತೆಯಿಂದ ಜನರಿಗೆ ಸಹಾಯ ಮಾಡಲು ಭೂಮಿಯಿಂದ ನೀರನ್ನು ಹೊರತೆಗೆದರು ಎಂದು ನಂಬಲಾಗಿದೆ. ಆ ಪವಿತ್ರ ನೀರಿನ ಝರಿಯೇ (ಝೀರಾ) ಇಂದು ಕೂಡ
-                        ಹರಿಯುತ್ತಿದೆ. ಇದು ಧಾರ್ಮಿಕ ಮತ್ತು ಐತಿಹಾಸಿಕ ಮಹತ್ವವನ್ನು ಹೊಂದಿರುವ ಸ್ಥಳವಾಗಿದೆ, ಅನೇಕ ಭಕ್ತರು ಇಲ್ಲಿಗೆ ಭೇಟಿ ನೀಡುತ್ತಾರೆ..</p>
+                    <p>ಗುರುದ್ವಾರ ಶ್ರೀ ನಾನಕ್ ಝೀರಾ ಸಾಹಿಬ್, ಬೀದರ್ ‌ನ ಪ್ರಸಿದ್ಧ ಗುರುದ್ವಾರವಾಗಿದೆ. ಸಿಖ್ ಧರ್ಮದ ಸ್ಥಾಪಕ ಗುರು ನಾನಕ್
+                        ಇಲ್ಲಿ ಭೇಟಿ ನೀಡಿದ್ದಾಗ ನೀರಿನ ಕೊರತೆಯಿಂದ ಜನರಿಗೆ ಸಹಾಯ ಮಾಡಲು ಭೂಮಿಯಿಂದ ನೀರನ್ನು ಹೊರತೆಗೆದರು ಎಂದು
+                        ನಂಬಲಾಗಿದೆ. ಆ ಪವಿತ್ರ ನೀರಿನ ಝರಿಯೇ (ಝೀರಾ) ಇಂದು ಕೂಡ
+                        ಹರಿಯುತ್ತಿದೆ. ಇದು ಧಾರ್ಮಿಕ ಮತ್ತು ಐತಿಹಾಸಿಕ ಮಹತ್ವವನ್ನು ಹೊಂದಿರುವ ಸ್ಥಳವಾಗಿದೆ, ಅನೇಕ ಭಕ್ತರು ಇಲ್ಲಿಗೆ ಭೇಟಿ
+                        ನೀಡುತ್ತಾರೆ..</p>
                     <!-- <a href="# " class="bidar-link ">Learn More →</a> -->
                 </div>
             </div>
@@ -484,22 +533,31 @@
         </div>
         <div class="gallery-grid ">
             <div class="gallery-item scroll-animate ">
-                <img src="assets/images/about images/cm 1st.jpg" alt="Cultural Performance" loading="lazy" decoding="async" width="600" height="300" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                <img src="assets/images/about images/cm 1st.jpg" alt="Cultural Performance" loading="lazy"
+                    decoding="async" width="600" height="300"
+                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
             </div>
             <div class="gallery-item scroll-animate ">
-                <img src="assets/images/gallery images/dk cm.jpeg" alt="Heritage Architecture" loading="lazy" decoding="async" width="300" height="300" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                <img src="assets/images/gallery images/dk cm.jpeg" alt="Heritage Architecture" loading="lazy"
+                    decoding="async" width="300" height="300"
+                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
             </div>
             <div class="gallery-item scroll-animate ">
-                <img src="assets/images/about images/basavaraj.jpg" alt="Traditional Art" loading="lazy" decoding="async" width="300" height="300" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                <img src="assets/images/about images/basavaraj.jpg" alt="Traditional Art" loading="lazy"
+                    decoding="async" width="300" height="300"
+                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
             </div>
             <div class="gallery-item scroll-animate ">
-                <img src="assets/images/gallery images/15.jpeg" alt="Cultural Gathering" loading="lazy" decoding="async" width="300" height="300" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                <img src="assets/images/gallery images/15.jpeg" alt="Cultural Gathering" loading="lazy" decoding="async"
+                    width="300" height="300" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
             </div>
             <div class="gallery-item scroll-animate ">
-                <img src="assets/images/about images/pavan 5th.jpg" alt="Bidar Heritage" loading="lazy" decoding="async" width="300" height="300" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                <img src="assets/images/about images/pavan 5th.jpg" alt="Bidar Heritage" loading="lazy" decoding="async"
+                    width="300" height="300" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
             </div>
             <div class="gallery-item scroll-animate ">
-                <img src="assets/images/gallery images/6.jpeg" alt="Event Moments" loading="lazy" decoding="async" width="300" height="300" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                <img src="assets/images/gallery images/6.jpeg" alt="Event Moments" loading="lazy" decoding="async"
+                    width="300" height="300" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
             </div>
         </div>
         <div class="section-button-container ">
@@ -528,7 +586,9 @@
             <div class="footer-section ">
                 <h3>ಬೀದರ್ 2026</h3>
                 <p>
-                    ಶ್ರೀ ಡಿ.ವಿ ಗುಂಡಪ್ಪ ಅವರು ೧೯೩೨ ರಲ್ಲಿ ಸ್ಥಾಪಿಸಿದ ಈ ಸಂಸ್ಥೆ ನಿರಂತರವಾಗಿ ಕಳೆದ ೮ ದಶಕಗಳಿಂದ ವೃತ್ತಿನಿರತ ಪತ್ರಕರ್ತರ ಸ್ಥಿತಿಗತಿಗಳನ್ನು ಸುಧಾರಿಸಲು ವಿಶಿಷ್ಟ ಕೊಡುಗೆಯನ್ನು ನೀಡುತ್ತಾ ಬಂದಿದೆ ಹಾಗೂ ಪತ್ರಕರ್ತರ ಕಾರ್ಮಿಕ ಹಿತಾಸಕ್ತಿಗಳನ್ನು ಕಾಪಾಡುವ ಏಕೈಕ ಸಂಸ್ಥೆಯಾಗಿದೆ. </p>
+                    ಶ್ರೀ ಡಿ.ವಿ ಗುಂಡಪ್ಪ ಅವರು ೧೯೩೨ ರಲ್ಲಿ ಸ್ಥಾಪಿಸಿದ ಈ ಸಂಸ್ಥೆ ನಿರಂತರವಾಗಿ ಕಳೆದ ೮ ದಶಕಗಳಿಂದ ವೃತ್ತಿನಿರತ
+                    ಪತ್ರಕರ್ತರ ಸ್ಥಿತಿಗತಿಗಳನ್ನು ಸುಧಾರಿಸಲು ವಿಶಿಷ್ಟ ಕೊಡುಗೆಯನ್ನು ನೀಡುತ್ತಾ ಬಂದಿದೆ ಹಾಗೂ ಪತ್ರಕರ್ತರ ಕಾರ್ಮಿಕ
+                    ಹಿತಾಸಕ್ತಿಗಳನ್ನು ಕಾಪಾಡುವ ಏಕೈಕ ಸಂಸ್ಥೆಯಾಗಿದೆ. </p>
                 <!-- <div class="social-links ">
                     <a href="# " class="social-link " aria-label="Facebook ">
                         <i class="fab fa-facebook-f "></i>
@@ -582,12 +642,12 @@
 
     <!-- Consolidated loader script (was 3 duplicate handlers) -->
     <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
+        window.addEventListener('load', function () {
+            setTimeout(function () {
                 var loader = document.getElementById('loader');
                 if (loader) {
                     loader.classList.add('fade-out');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         loader.style.display = 'none';
                     }, 500);
                 }
