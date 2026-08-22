@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Bidar Cultural Summit 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="assets/images/about images/without bg logo.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/GALLERY.css">
+    <!-- <link rel="stylesheet" href="assets/css/nav.css"> -->
+    <!--  google translater -->
+    <link rel="preconnect" href="https://translate.google.com">
+    <link rel="dns-prefetch" href="https://translate.google.com">
+    <link rel="stylesheet" href="assets/css/trans.css">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-2"><img src="assets/images/about images/without bg logo.png" alt="" srcset=""
+                    style="width: 50px;"></div>
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="sammelana.html">sammelana</a></li>
+                <li><a href="videos.html" class="active">videos</a></li>
+                <li><a href="index.html#register" class="nav-cta">Register Now</a></li>
+                <div id="google_translate_element"></div>
+            </ul>
+            <div class="mobile-menu-btn">
+
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Visual Journey</p>
+            <h1 class="hero-title">Gallery</h1>
+            <p class="hero-description">
+                <!-- Explore the captivating moments from Bidar Cultural Summit—where heritage meets artistry -->
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="heritage">Heritage</button>
+                <!-- <button class="filter-btn" data-filter="performances">Performances</button>
+                <button class="filter-btn" data-filter="workshops">Workshops</button>
+                <button class="filter-btn" data-filter="exhibitions">Exhibitions</button>
+                <button class="filter-btn" data-filter="venue">Venue</button> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-grid">
+
+                <!-- Heritage Images -->
+                <!-- <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/005.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div> -->
+
+                <!-- Day 1 images -->
+
+
+                <!-- new images -->
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/073.jpg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/075.jpg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/076.jpg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/077.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/078.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/079.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/075.jpg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/076.jpg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/070.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/071.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/072.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/058.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/059.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/060.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/061.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/062.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/063.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/064.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/065.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/066.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/067.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/068.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/002.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/003.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/004.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/005.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/006.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/007.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/008.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/009.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/010.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/012.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/013.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/014.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/015.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/017.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/019.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/020.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/021.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/022.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/023.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/024.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+
+                <!-- end of new images  -->
+
+                <!-- 23/02/26 -->
+
+
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/050.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/028.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/029.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/030.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/031.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/032.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/032.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/033.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/034.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/035.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/036.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/037.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/038.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/039.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/040.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/041.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/042.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/043.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/044.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/045.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/046.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/047.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/048.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/049.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/050.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/051.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/052.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/053.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/054.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/055.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/056.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/057.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <!-- end 23/02/26  -->
+
+
+
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/banner -2.jpg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/1.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/2.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/3.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/4.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <!-- cloned images -->
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/5.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/6.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/7.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/8.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/9.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/10.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/11.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/12.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/13.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/14.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/15.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/16.jpeg" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/17.jpeg" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="assets/images/gallery images/18.jpeg" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="assets/images/gallery images/17.jpeg" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- 
+                <div class="gallery-item" data-category="heritage">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800&q=80" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="https://images.unsplash.com/photo-1533094602577-198d3beab8ea?w=1200&q=80" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="heritage">
+                    <img src="" alt="Bidar Fort Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800&q=80" alt="Historical Monument" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="heritage">
+                    <img src="https://images.unsplash.com/photo-1533094602577-198d3beab8ea?w=1200&q=80" alt="Cultural Heritage" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="heritage">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80" alt="Ancient Structures" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- Performance Images -->
+                <!-- <div class="gallery-item gallery-tall" data-category="performances">
+                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80" alt="Cultural Performance" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Classical Dance</h3>
+                            <p>Cultural Performance</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="performances">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80" alt="Traditional Music" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Traditional Music</h3>
+                            <p>Live Performance</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="performances">
+                    <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80" alt="Stage Performance" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Stage Show</h3>
+                            <p>Evening Performance</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div> -->
+
+                <!-- Workshop Images -->
+                <!-- <div class="gallery-item" data-category="workshops">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Craft Workshop" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Bidriware Workshop</h3>
+                            <p>Traditional Crafts</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="workshops">
+                    <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=1200&q=80" alt="Art Workshop" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Artisan Session</h3>
+                            <p>Hands-on Workshop</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="workshops">
+                    <img src="https://images.unsplash.com/photo-1544306094-e2dcf9479da3?w=800&q=80" alt="Learning Session" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Heritage Workshop</h3>
+                            <p>Interactive Learning</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div> -->
+
+                <!-- Exhibition Images -->
+                <!-- <div class="gallery-item" data-category="exhibitions">
+                    <img src="https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=800&q=80" alt="Art Exhibition" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Art Exhibition</h3>
+                            <p>Contemporary Art</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-tall" data-category="exhibitions">
+                    <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=800&q=80" alt="Cultural Display" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Cultural Display</h3>
+                            <p>Heritage Artifacts</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="exhibitions">
+                    <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800&q=80" alt="Museum Display" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Museum Collection</h3>
+                            <p>Rare Artifacts</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div> -->
+
+                <!-- Venue Images -->
+                <!-- <div class="gallery-item" data-category="venue">
+                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&q=80" alt="Event Venue" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Main Venue</h3>
+                            <p>Grand Hall Setup</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="venue">
+                    <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?w=1200&q=80" alt="Event Space" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Conference Hall</h3>
+                            <p>Main Event Space</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="venue">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Outdoor Venue" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Outdoor Arena</h3>
+                            <p>Evening Performances</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div> -->
+
+                <!-- Additional Mixed Images -->
+                <!-- <div class="gallery-item" data-category="heritage">
+                    <img src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800&q=80" alt="Traditional Architecture" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Sacred Heritage</h3>
+                            <p>Religious Architecture</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="performances">
+                    <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80" alt="Folk Performance" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Folk Dance</h3>
+                            <p>Regional Traditions</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-wide" data-category="exhibitions">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200&q=80" alt="Gallery Exhibition" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Art Gallery</h3>
+                            <p>Curated Collection</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="workshops">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80" alt="Creative Workshop" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-info">
+                            <h3>Creative Session</h3>
+                            <p>Art & Craft</p>
+                        </div>
+                        <button class="view-btn">View</button>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- Load More Button -->
+            <div class="load-more-container">
+                <button class="load-more-btn">Load More Images</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Lightbox -->
+    <div class="modal" id="imageModal">
+        <button class="modal-close">&times;</button>
+        <button class="modal-prev">‹</button>
+        <button class="modal-next">›</button>
+        <div class="modal-content">
+            <img src="" alt="" id="modalImage">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalCategory"></p>
+            </div>
+            <div class="modal-counter">
+                <span id="modalCounter"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ಬೀದರ್ 2026</h3>
+                <p> ಶ್ರೀ ಡಿ.ವಿ ಗುಂಡಪ್ಪ ಅವರು ೧೯೩೨ ರಲ್ಲಿ ಸ್ಥಾಪಿಸಿದ ಈ ಸಂಸ್ಥೆ ನಿರಂತರವಾಗಿ ಕಳೆದ ೮ ದಶಕಗಳಿಂದ ವೃತ್ತಿನಿರತ
+                    ಪತ್ರಕರ್ತರ ಸ್ಥಿತಿಗತಿಗಳನ್ನು ಸುಧಾರಿಸಲು ವಿಶಿಷ್ಟ ಕೊಡುಗೆಯನ್ನು ನೀಡುತ್ತಾ ಬಂದಿದೆ ಹಾಗೂ ಪತ್ರಕರ್ತರ ಕಾರ್ಮಿಕ
+                    ಹಿತಾಸಕ್ತಿಗಳನ್ನು ಕಾಪಾಡುವ ಏಕೈಕ ಸಂಸ್ಥೆಯಾಗಿದೆ.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="gallery.html">Gallery</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <!-- <a href="mailto:info@bidarsummit2026.com">info@bidarsummit2026.com</a> -->
+                <a href="tel:+918482222333">+91 8971634442</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;Made with ❤️ by <a href="mailto:pavanpatil9104@gmail.com">Pavan Patil</a></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/GALLERY.js"></script>
+
+    <!-- google -->
+    <!-- <section>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'kn,en,hi',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                }, 'google_translate_element');
+
+                autoSelectKannada();
+            }
+
+            function autoSelectKannada() {
+                var checkExist = setInterval(function() {
+                    var select = document.querySelector(".goog-te-combo");
+
+                    if (select) {
+                        select.value = "kn";
+                        select.dispatchEvent(new Event("change"));
+                        clearInterval(checkExist);
+                    }
+                }, 300);
+            }
+        </script>
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </section> -->
+    <script src="assets/js/translate.js"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+
+</html>
